@@ -1,0 +1,45 @@
+@import 'mixins';
+
+body {
+  @extend %clearfix;
+  background-image: url("/images/textured_paper.png");
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+[role='main'] {
+  position: relative;
+  padding: 1.5em 1em;
+  width: 100%;
+  &:before {
+    display: block;
+    margin-top: 20%;
+    height: 20%;
+    content: ' ';
+  }
+
+.content {
+    position: relative;
+    background-color: $white;
+    border: 1px solid lighten($color1, 20);
+    color: darken($dark, 15);
+    margin: 0 auto;
+    padding: 1.5em 1em;
+    z-index: 100;
+    min-height: 60%;
+    @include bp-lg {
+      width: 50%;
+    }
+
+@include bp-md {
+      width: 80%;
+    }
+
+@include bp-sm {
+      width: 100%;
+    }
+  }
+}
+
+@import 'header';
