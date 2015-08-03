@@ -1,12 +1,13 @@
+@import 'variables';
 
 @mixin bp-lg {
-  @media only screen and (min-width: 41em) {
+  @media only screen and (min-width: 51em) {
     @content;
   }
 }
 
 @mixin bp-md {
-  @media only screen and (max-width: 40em) {
+  @media only screen and (max-width: 50em) {
     @content;
   }
 }
@@ -56,4 +57,25 @@
   &:after {
     clear: both;
   }
+}
+
+@mixin circle($size) {
+    border-radius: $size / 2;
+    width: $size;
+    height: $size;
+}
+
+%content-width {
+    @include bp-lg
+    {
+        width: $content-width-lg;
+    }
+    @include bp-md
+    {
+        width: $content-width-md;
+    }
+    @include bp-sm
+    {
+        width: $content-width-sm;
+    }
 }
