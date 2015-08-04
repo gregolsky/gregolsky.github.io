@@ -10,6 +10,7 @@ html.no-js
     base(href="/")
     link(rel="stylesheet" href="/styles/main.css")
     link(rel="stylesheet" href="/styles/vendor.css")
+    
     //-script(src='js/vendor/modernizr-2.7.1.min.js')
   body
     <!--[if lt IE 8]>
@@ -23,8 +24,13 @@ html.no-js
     header
       .bg
       nav
-        h1.title Words and semicolons
-        img.portrait(src="images/glbeard-sm.jpg",alt="Grzegorz Lachowski")
+        .col
+          img.portrait(src="images/glbeard-sm.jpg",alt="Grzegorz Lachowski")
+        .col
+          .title
+            h1 
+              span Grzegorz Lachowski's <br/>
+              span.sub external public memory 
       
     
     div(role='main')

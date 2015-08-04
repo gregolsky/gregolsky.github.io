@@ -1,0 +1,32 @@
+@import 'variables';
+@import 'mixins';
+
+h1, h2, h3, h4 {
+    font-family: $font-h;
+    margin: 0;
+}
+
+p {
+    font-family: $font-p;
+}
+
+a {
+    font-family: inherit;
+    color: $special;
+    font-weight: bold;
+    padding: 0 0.5em;
+    text-decoration: underline;
+}
+
+%regular-border-radius {
+    border-radius: 3px;
+}
+
+%card {
+    border: 1px solid #ccc;
+    background-color: $white;
+    margin: 0 auto;
+    padding: 1.3em 2em;
+    @extend %regular-border-radius;
+    @include box-shadow(3);
+}

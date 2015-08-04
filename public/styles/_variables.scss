@@ -1,9 +1,10 @@
 
-$color1: #444545; //rgba(68, 69, 69, 100)
-$color2: #7c878c; //rgba(124, 135, 140, 100)
-$color3: #9e9054; //rgba(158, 144, 84, 100)
-$color4: #fff249; //rgba(255, 242, 73, 100)
-$color5: #fffce8; //rgba(255, 252, 232, 100)
+
+$color1: #363537;
+$color2: #272838; 
+$color3: #53131E;
+$color4: #fff249;
+$color5: #483D3F;
 
 $white: #fefefe;
 $light: $white;
@@ -22,3 +23,6 @@ $header-init-height: 40%;
 $content-width-sm: 100%;
 $content-width-md: 80%;
 $content-width-lg: 60%;
+
+$font-h: 'Playfair Display', serif;
+$font-p: 'Alice', serif;

@@ -3,10 +3,8 @@
 body
 {
     position: relative;
-
     margin: 0;
     padding: 0;
-    height: 100%;
 
     background-image: url('/images/textured_paper.png');
 
@@ -15,7 +13,6 @@ body
 
 [role='main']
 {
-    position: relative;
 
     width: 100%;
     padding: 1.5em 1em;
@@ -23,18 +20,13 @@ body
     .content
     {
       @extend %content-width;
+      @extend %card;
 
-      position: relative;
       z-index: 100;
 
-      min-height: 60%;
-      margin: 0 auto;
-      padding: 1.5em 1em;
+      min-height: 500px;
 
       color: darken($dark, 15);
-      border: 1px solid lighten($color1, 20);
-      background-color: $white;
-
     }
 }
 
