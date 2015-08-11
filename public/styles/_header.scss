@@ -31,7 +31,7 @@ header
     }
 }
 
-nav
+.cols
 {
     position: relative;
 
@@ -103,10 +103,56 @@ nav
         span {
             margin: 0;
             padding: 10px;
-            background-color: transparentize($dark, 0.3);
+            background-color: transparentize($dark, .3);
 
             &.sub {
                 margin-left: 20px;
+            }
+        }
+    }
+}
+
+nav {
+    @extend %content-width;
+
+    position: relative;
+    background-color: transparentize($color1, .5);
+    margin: 5px auto;
+    padding: 5px 0;
+    z-index: 100;
+    text-align: right;
+
+    ul.menu {
+        @extend %clearfix;
+        display: inline-block;
+        list-style-type: none;
+        @include font-size(30px);
+        font-family: $font-h;
+        height: 1.5em;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: block;
+            color: $white;
+            float: left;
+            padding-right: 15px;
+            padding-left: 0;
+
+            &:after {
+                margin: 0 5px;
+                padding-left: 15px;
+                content: '+';
+                color: $primary;
+                display: inline-block;
+            }
+
+            &:before {
+            }
+
+            &:last-child:after {
+                content: '';
+                display: none;
             }
         }
     }

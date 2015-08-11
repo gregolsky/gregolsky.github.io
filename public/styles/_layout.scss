@@ -3,30 +3,27 @@
 body
 {
     position: relative;
+
     margin: 0;
     padding: 0;
-
-    background-image: url('/images/textured_paper.png');
 
     @extend %clearfix;
 }
 
 [role='main']
 {
-
     width: 100%;
     padding: 1.5em 1em;
 
     .content
     {
-      @extend %content-width;
-      @extend %card;
+        z-index: 100;
 
-      z-index: 100;
+        margin: 0 auto;
 
-      min-height: 500px;
+        color: darken($dark, 15);
 
-      color: darken($dark, 15);
+        @extend %content-width;
     }
 }
 
