@@ -1,0 +1,71 @@
+@import 'styleguide';
+@import 'mixins';
+ul.articles
+{
+    margin: 0;
+    padding: 0;
+
+    list-style-type: none;
+
+    @extend %clearfix;
+    $article-width: 250px;
+    $article-height: $article-width / 3;
+
+    li
+    {
+        a {
+            text-decoration: none;
+        }
+
+        display: block;
+        float: left;
+
+        margin: 10px;
+
+        .article
+        {
+            font-family: 'Roboto';
+
+            position: relative;
+
+            width: $article-width;
+            height: $article-height;
+            margin: 0;
+            padding: 0;
+
+            @extend %card;
+
+            .title
+            {
+                position: relative;
+                z-index: 10;
+
+                display: block;
+
+                margin: 0;
+                padding: 10px;
+
+                color: $white;
+                background-color: transparentize($color2, .3);
+            }
+
+            .cover
+            {
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                left: 0;
+
+                overflow: hidden;
+
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+
+                border: none;
+                background-color: $color4;
+            }
+        }
+    }
+}

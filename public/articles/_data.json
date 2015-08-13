@@ -1,6 +1,11 @@
 {
     "first": {
-        "createdAt": "2015-08-05",
-        "title": "The first post problem"
+        "createdAt": "2015-08-04",
+        "title": "The first post problem",
+        "pic": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Apollo_11_first_step.jpg" 
+    },
+    "harp-static-sites-made-simple": {
+        "createdAt": "2015-08-12",
+        "title": "Harp - static sites made simple"
     }
 }

@@ -1,32 +1,57 @@
 @import 'variables';
 @import 'mixins';
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4
+{
     font-family: $font-h;
+
     margin: 0;
 }
 
-p {
+p
+{
     font-family: $font-p;
 }
 
-a {
+a
+{
     font-family: inherit;
-    color: $special;
     font-weight: bold;
-    padding: 0 0.5em;
+
+    padding: 0 .5em;
+
     text-decoration: underline;
+
+    color: inherit;
 }
 
-%regular-border-radius {
+%regular-border-radius
+{
     border-radius: 3px;
 }
 
-%card {
-    border: 1px solid #ccc;
-    background-color: $white;
+%card
+{
     margin: 0 auto;
     padding: 1.3em 2em;
+
+    transition: .3s;
+
+    border: 1px solid #ccc;
+    background-color: $white;
+
     @extend %regular-border-radius;
     @include box-shadow(3);
+
+    &:hover
+    {
+        z-index: 1000;
+
+        transition: .3s;
+        transition-timing-function: ease-in-out;
+        transform: scale(1.2);
+    }
 }

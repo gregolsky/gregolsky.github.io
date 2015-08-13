@@ -20,7 +20,6 @@ html.no-js
       | to improve your experience.
     <![endif]-->
 
-    //- Add your site or application content here
     header
       .bg
       .cols 
@@ -31,15 +30,17 @@ html.no-js
             h1 
               span Grzegorz Lachowski's <br/>
               span.sub external public memory
-      nav
+      nav(role='navigation')
         ul.menu
-          li about
-          li projects
-          li posts
-      
+          li 
+            a(href='/about') about
+          li 
+            a(href='/projects') projects
+          li
+            a(href='/') articles      
     
     div(role='main')
-      .content
+      article
        != yield
 
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')

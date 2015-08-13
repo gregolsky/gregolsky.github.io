@@ -116,13 +116,13 @@ nav {
     @extend %content-width;
 
     position: relative;
-    background-color: transparentize($color1, .5);
     margin: 5px auto;
     padding: 5px 0;
     z-index: 100;
     text-align: right;
 
     ul.menu {
+        background-color: transparentize($color1, .3);
         @extend %clearfix;
         display: inline-block;
         list-style-type: none;
@@ -130,7 +130,7 @@ nav {
         font-family: $font-h;
         height: 1.5em;
         margin: 0;
-        padding: 0;
+        padding: 0 15px;
 
         li {
             display: block;
@@ -138,6 +138,13 @@ nav {
             float: left;
             padding-right: 15px;
             padding-left: 0;
+
+            a {
+                color: white;
+                text-decoration: none;
+                font-weight: normal;
+                padding: 0;
+            }
 
             &:after {
                 margin: 0 5px;
@@ -147,7 +154,8 @@ nav {
                 display: inline-block;
             }
 
-            &:before {
+            &:last-child {
+                padding-right: 0;
             }
 
             &:last-child:after {
