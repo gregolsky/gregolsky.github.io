@@ -1,19 +1,19 @@
 @import 'variables';
 
 @mixin bp-lg {
-  @media only screen and (min-width: 51em) {
+  @media only screen and (min-width: 1400px) {
     @content;
   }
 }
 
 @mixin bp-md {
-  @media only screen and (max-width: 50em) {
+  @media only screen and (min-width: 769px) {
     @content;
   }
 }
 
 @mixin bp-sm {
-  @media only screen and (max-width: 30em) {
+  @media only screen and (max-width: 768px) {
     @content;
   }
 }
@@ -66,18 +66,20 @@
 }
 
 %content-width {
-    @include bp-lg
-    {
-        width: $content-width-lg;
+    @include bp-sm {
+        width: $content-width-sm;
     }
+
     @include bp-md
     {
         width: $content-width-md;
     }
-    @include bp-sm
+
+    @include bp-lg
     {
-        width: $content-width-sm;
+        width: $content-width-lg;
     }
+
 }
 
 @function calculateRem($size) {

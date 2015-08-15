@@ -22,26 +22,27 @@ html.no-js
 
     header
       .bg
-      .cols 
-        .col
-          img.portrait(src="images/glbeard-sm.jpg",alt="Grzegorz Lachowski")
-        .col
-          .title
-            h1 
-              span Grzegorz Lachowski's <br/>
-              span.sub external public memory
-      nav(role='navigation')
-        ul.menu
-          li 
-            a(href='/about') about
-          li 
-            a(href='/projects') projects
-          li
-            a(href='/') articles      
+      .wrap
+        .cols 
+          .col
+            img.portrait(src="images/glbeard-sm.jpg",alt="Grzegorz Lachowski")
+          .col
+            .title
+              h1 Grzegorz Lachowski
+                br
+                small Tech, programming, UX frustrations and life and death situations.
+        nav(role='navigation')
+          ul.menu
+            li 
+              a(href='/about') about
+            li 
+              a(href='/projects') projects
+            li
+              a(href='/') articles      
     
     div(role='main')
       article
-       != yield
+        != yield
 
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
     script window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')

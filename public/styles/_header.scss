@@ -1,6 +1,6 @@
 @import 'animations';
 @import 'mixins';
-
+@import 'variables';
 
 header
 {
@@ -31,16 +31,20 @@ header
     }
 }
 
+header .wrap {
+    position: relative;
+    margin: 0 auto;
+    background-color: transparentize($color1, .5);
+    @extend %content-width;
+}
+
 .cols
 {
-    position: relative;
-
-    margin: 0 auto;
-
-    @extend %content-width;
     @extend %clearfix;
 
-    $portrait-margin: 50px;
+    $portrait-margin-sm: 10px;
+    $portrait-margin-md: 30px;
+    $portrait-margin-lg: 50px;
 
     .col {
         display: block;
@@ -49,66 +53,77 @@ header
 
         @include bp-sm
         {
-            height: 100px + $portrait-margin * 2;
+            height: 100px + $portrait-margin-sm * 2;
         }
         @include bp-md
         {
-            height: 140px + $portrait-margin * 2;
+            height: 140px + $portrait-margin-md * 2;
         }
         @include bp-lg
         {
-            height: 180px + $portrait-margin * 2;
+            height: 180px + $portrait-margin-lg * 2;
         }
     }
 
     .portrait
     {
-        margin: $portrait-margin 30px;
+        margin: $portrait-margin-sm 7px;
 
         text-align: right;
 
         border: 3px solid $primary;
 
-        @include bp-sm
-        {
-            @include circle(100px);
-        }
+        @include circle(100px);
+
         @include bp-md
         {
+            margin: $portrait-margin-md 15px;
             @include circle(140px);
         }
-        @include bp-lg
-        {
+
+        @include bp-lg {
+            margin: $portrait-margin-lg 30px;
             @include circle(180px);
         }
     }
 
     .title {
-        display: block;
         position: relative;
         top: 50%;
+        display: block;
         transform: translateY(-50%);
     }
 
     h1
     {
+        display: inline-block;
         color: $white;
-        display: inline;
         font-family: $font-h;
-        line-height: 80px;
-        vertical-align: middle;
+        font-size: 5vw;
+        border-radius: $border-radius-default;
 
-        @include font-size(40px);
+        @include bp-md {
+            font-size: 2.6vw;
+        }
 
-        span {
-            margin: 0;
-            padding: 10px;
-            background-color: transparentize($dark, .3);
+        @include bp-lg {
+            font-size: 2vw;
+        }
 
-            &.sub {
-                margin-left: 20px;
+        small {
+            display: none;
+            font-weight: 200;
+            font-family: 'Roboto';
+            font-size: 0.6em;
+
+            @include bp-md {
+                display: inline-block;
+            }
+            @include bp-lg {
+                font-size: 0.5em;
             }
         }
+
     }
 }
 
@@ -119,14 +134,27 @@ nav {
     margin: 5px auto;
     padding: 5px 0;
     z-index: 100;
-    text-align: right;
+    text-align: center;
+
+    @include bp-md {
+        text-align: right;
+    }
 
     ul.menu {
-        background-color: transparentize($color1, .3);
         @extend %clearfix;
         display: inline-block;
         list-style-type: none;
-        @include font-size(30px);
+
+        @include font-size(20px);
+
+        @include bp-md {
+            @include font-size(24px);
+        }
+
+        @include bp-lg {
+            @include font-size(30px);
+        }
+
         font-family: $font-h;
         height: 1.5em;
         margin: 0;
@@ -156,12 +184,23 @@ nav {
 
             &:last-child {
                 padding-right: 0;
+
+                &:after {
+                    padding-left: 0;
+                    display: none;
+                }
+
             }
 
-            &:last-child:after {
-                content: '';
-                display: none;
-            }
+
+            // &:first-child:before,
+            // &:last-child:after {
+            //     content: '|';
+            //     padding: 0 5px;
+            //     display: inline-block;
+            //     color: #ccc;
+            // }
+
         }
     }
 }
