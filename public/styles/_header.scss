@@ -42,7 +42,7 @@ header .wrap {
 {
     @extend %clearfix;
 
-    $portrait-margin-sm: 10px;
+    $portrait-margin-sm: 15px;
     $portrait-margin-md: 30px;
     $portrait-margin-lg: 50px;
 
@@ -73,7 +73,7 @@ header .wrap {
 
         border: 3px solid $primary;
 
-        @include circle(100px);
+        @include circle(80px);
 
         @include bp-md
         {
@@ -99,7 +99,7 @@ header .wrap {
         display: inline-block;
         color: $white;
         font-family: $font-h;
-        font-size: 5vw;
+        font-size: 4.5vw;
         border-radius: $border-radius-default;
 
         @include bp-md {
@@ -145,7 +145,7 @@ nav {
         display: inline-block;
         list-style-type: none;
 
-        @include font-size(20px);
+        @include font-size(16px);
 
         @include bp-md {
             @include font-size(24px);
