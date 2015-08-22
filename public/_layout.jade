@@ -20,26 +20,7 @@ html.no-js
       | to improve your experience.
     <![endif]-->
 
-    header
-      .bg
-      .wrap
-        .cols 
-          .col
-            img.portrait(src="images/glbeard-sm.jpg",alt="Grzegorz Lachowski")
-          .col
-            .title
-              h1 Grzegorz Lachowski
-                br
-                small Tech, programming, UX frustrations and life and death situations.
-        nav(role='navigation')
-          ul.menu
-            li 
-              a(href='/about') about
-            li 
-              a(href='/projects') projects
-            li
-              a(href='/') articles      
-    
+    include _partials/header.jade
     div(role='main')
       article
         != yield

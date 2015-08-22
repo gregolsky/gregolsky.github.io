@@ -40,7 +40,7 @@ a
     background-color: $white;
     border-radius: $border-radius-default;
 
-    @include box-shadow(3);
+    @include material-shadow(2);
 
     &:hover
     {

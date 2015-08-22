@@ -26,7 +26,7 @@ header
         background-image: url('/images/thorn.jpg');
         background-position: center center;
 
-        @include box-shadow(2);
+        @include material-shadow(2);
         @include animation('fade-in 3s ease-out 0s 1');
     }
 }

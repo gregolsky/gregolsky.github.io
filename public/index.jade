@@ -6,6 +6,7 @@ ul.articles
       a(href="/articles/#{ slug }")
         .article
           .title #{ article.title }
-          .cover
-            if article.pic
-              img(src="#{ article.pic }")
+          if article.pic
+            .cover(style="background-image: url('#{ article.pic }');")
+          else
+           .cover

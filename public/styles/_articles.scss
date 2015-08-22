@@ -1,5 +1,6 @@
 @import 'styleguide';
 @import 'mixins';
+
 ul.articles
 {
     margin: 0;
@@ -9,7 +10,7 @@ ul.articles
 
     @extend %clearfix;
     $article-width: 250px;
-    $article-height: $article-width / 3;
+    $article-height: $article-width / 2;
 
     li
     {
@@ -65,6 +66,8 @@ ul.articles
 
                 border: none;
                 background-color: $color4;
+                background-position: center center;
+                background-size: cover;
             }
         }
     }
