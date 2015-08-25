@@ -9,15 +9,21 @@ body
     padding: 0;
 
     @extend %clearfix;
+    background-color: #eee;
+}
+
+footer {
+    height: 50px;
 }
 
 [role='main']
 {
     width: 100%;
-    padding: 1.5em 1em;
 
     article {
         @extend %content-width;
+        background-color: white;
+        padding: 3em 3em;
 
         z-index: 100;
 
@@ -25,13 +31,18 @@ body
 
         color: darken($dark, 15);
 
-
         h2 {
             @include font-size(40px);
             font-variant: small-caps;
             display: inline-block;
             padding: 0 10px 3px 0;
             margin-bottom: 15px;
+        }
+
+        .createdAt {
+            display: block;
+            color: lighten($dark, 20);
+            font-family: $font-p;
         }
 
         .titlepic {
