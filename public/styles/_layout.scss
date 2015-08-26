@@ -10,6 +10,7 @@ body
 
     @extend %clearfix;
     background-color: #eee;
+    background-image: url('../images/textured_paper.png')
 }
 
 footer {
@@ -29,6 +30,7 @@ footer {
         z-index: 100;
 
         margin: 0 auto;
+        min-height: 500px;
 
         color: darken($dark, 15);
 

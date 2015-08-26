@@ -10,5 +10,5 @@ rss(version="2.0", xmlns:atom="http://www.w3.org/2005/Atom")
         title= post.title
         description <![CDATA[!{ partial('articles/' + slug) }]]>
         pubDate= new Date(post.createdAt)
-        link #{ blogUrl }/article/#{ slug }
-        guid(isPermaLink="true") #{ blogUrl }/article/#{ slug }
+        link #{ blogUrl }/articles/#{ slug }
+        guid(isPermaLink="true") #{ blogUrl }/articles/#{ slug }
