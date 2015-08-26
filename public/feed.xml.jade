@@ -1,0 +1,14 @@
+doctype xml
+rss(version="2.0", xmlns:atom="http://www.w3.org/2005/Atom")
+  channel  
+    title= blogTitle
+    link= blogUrl
+    description= blogSubtitle
+    atom:link(href="#{ blogUrl }/feed.xml", rel="self", type="application/rss+xml")
+    for post, slug in public.articles._data
+      item
+        title= post.title
+        description <![CDATA[!{ partial('articles/' + slug) }]]>
+        pubDate= new Date(post.createdAt)
+        link #{ blogUrl }/article/#{ slug }
+        guid(isPermaLink="true") #{ blogUrl }/article/#{ slug }

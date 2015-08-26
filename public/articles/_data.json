@@ -1,7 +1,8 @@
 {
     "trying-out-harp": {
-        "createdAt": "2015-08-16",
+        "createdAt": "2015-08-26",
         "title": "Trying out Harp",
-        "pic": "http://www.caswellharps.com/faqs/faqs/files/parts%20of%20a%20harp.jpg"
+        "pic": "http://www.caswellharps.com/faqs/faqs/files/parts%20of%20a%20harp.jpg",
+        "description": "Few words about Harp - a web server simplifying frontend development workflow."
     }
 }

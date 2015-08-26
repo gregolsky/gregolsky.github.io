@@ -1,5 +1,7 @@
 {
   "globals": {
-    "title": "Grzegorz Lachowski"
+      "blogTitle": "Grzegorz Lachowski",
+      "blogUrl": "http://gregolsky.github.io",
+      "blogSubtitle": "Tech, programming, UX frustrations and a bit of life hacking."
   }
 }
