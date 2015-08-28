@@ -99,6 +99,8 @@ header .wrap {
         display: inline-block;
         color: $white;
         font-family: $font-sans;
+        font-variant: small-caps;
+        letter-spacing: 2px;
         font-size: 4.5vw;
         border-radius: $border-radius-default;
 
@@ -113,7 +115,8 @@ header .wrap {
         small {
             display: none;
             font-weight: 200;
-            font-family: 'Roboto';
+            font-variant: normal;
+            font-family: inherit;
             font-size: 0.6em;
 
             @include bp-md {
@@ -156,6 +159,7 @@ nav {
         }
 
         font-family: $font-sans;
+        letter-spacing: 0.1em;
         height: 1.5em;
         margin: 0;
         padding: 0 15px;
