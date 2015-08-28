@@ -98,7 +98,7 @@ header .wrap {
     {
         display: inline-block;
         color: $white;
-        font-family: $font-h;
+        font-family: $font-sans;
         font-size: 4.5vw;
         border-radius: $border-radius-default;
 
@@ -155,7 +155,7 @@ nav {
             @include font-size(30px);
         }
 
-        font-family: $font-h;
+        font-family: $font-sans;
         height: 1.5em;
         margin: 0;
         padding: 0 15px;

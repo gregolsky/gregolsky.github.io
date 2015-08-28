@@ -1,7 +1,8 @@
-Once upon a time I wanted to start a simple website project. Actually it was this blog.
-I decided it needs to be static, easy to maintain, should support Markdown and I want to build it from ground up to learn some stuff along the way. As you may suspect there is quite a choice of solutions like that and I'm a married man and a young father, so I cannot afford to check all of them out, right?
+I always wanted to start a blog.
 
-My first idea was to use [Yeoman](http://yeoman.io/) to scaffold an app using `gulp-webapp` generator. Yo gulp-webapp! Done. Then I added an icon framework and the icons did not get copied to the place I wanted them to, SCSS transpiler was misbehavin' and after another hour spent on the Gulpfile configuration daddy's daily computer time was over. Man, I wanted to start a simple thing, but was buried in the configuration along with the project and I must admit I hate configurating things. Everybody does, right?
+I decided it needs to be an easy to maintain static webpage. It should also support Markdown and I want to build it from ground up learning some cool stuff along the way. As you may suspect there is quite a choice of solutions like that and I'm a married man and a young father, so I cannot afford to try out all of them out.
+
+My first idea was to use [Yeoman](http://yeoman.io/) to scaffold an app using `gulp-webapp` generator. Yo gulp-webapp! Done. Then I added an icon framework and the icons did not get copied to the place I wanted them to, SCSS transpiler was misbehavin' and after another hour spent on the Gulpfile configuration daddy's daily computer time was over. Man, I wanted to start a simple thing, but was buried in the configuration along with the project and I must admit I hate configuring things. Everybody does, right?
 
 I wanted less configuration, more building and support for the new cool web stuff out-of-the-box. And then after some more googling I found [Harp](http://harpjs.com/). Harp among other things is a Node.js-based web server with built-in transpilers for all frontend goodies like template engines (Jade and EJS), CSS preprocessors (SCSS, LESS), Markdown (!), Coffescript and convention-over-configuration approach. It processes your files on the fly and serves as plain old HTML and CSS.
 

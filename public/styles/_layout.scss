@@ -45,7 +45,8 @@ footer {
         .createdAt {
             display: block;
             color: lighten($dark, 20);
-            font-family: $font-p;
+            letter-spacing: 0.15em;
+            font-family: $font-sans;
         }
 
         .titlepic {
