@@ -3,7 +3,7 @@ h2 articles
 ul.articles
   each article, slug in public.articles._data
     li
-      a(href="/articles/#{ slug }")
+      a(href="/articles/#{ slug }.html")
         .article
           .title #{ article.title }
           if article.pic
