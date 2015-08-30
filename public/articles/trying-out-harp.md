@@ -10,4 +10,4 @@ While all this automation and conventions are nice, yet I quickly missed my gulp
 
 To sum up, I think Harp is a great tool for beginners and people, who value the simplicity and ~~are a bit lazy~~ want to quickly start something skipping the misery of initial project configuration and rely more on predefined conventions. What I can say for sure it's perfect for small projects (like a static blog), but I suspect once you need some more complex work done, then you are probably going to miss Grunt/Gulp flexibility.
 
-As this blog was created using Harp, do not forget to check out [the source](https://github.com/gregolsky/gregolsky.github.io) or try Harp on your own. There is a great developer's guide on Harp's website and some ready to use recipes like for building a blog. Go check! See ya.
+As this blog was created using Harp, do not forget to check out [the source](https://github.com/gregolsky/blog) or try Harp on your own. There is a great developer's guide on Harp's website and some ready to use recipes like for building a blog. Go check! See ya.
