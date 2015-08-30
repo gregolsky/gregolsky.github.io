@@ -1,19 +1,23 @@
 @import 'mixins';
+@import 'variables';
 
 body
 {
     font-size: 16px;
+
     position: relative;
 
     margin: 0;
     padding: 0;
 
-    @extend %clearfix;
     background-color: #eee;
-    background-image: url('../images/textured_paper.png')
+    background-image: url('../images/textured_paper.png');
+
+    @extend %clearfix;
 }
 
-footer {
+footer
+{
     height: 50px;
 }
 
@@ -21,51 +25,95 @@ footer {
 {
     width: 100%;
 
-    article {
-        @extend %content-width;
-        @include material-shadow(2);
-        background-color: white;
-        padding: 3em 3em;
-
+    article
+    {
         z-index: 100;
 
-        margin: 0 auto;
         min-height: 500px;
+        margin: 0 auto;
+        padding: 3em 3em;
 
         color: darken($dark, 15);
+        background-color: white;
 
-        h2 {
-            @include font-size(40px);
+        @extend %content-width;
+        @include material-shadow(2);
+
+        h2
+        {
             font-variant: small-caps;
+
             display: inline-block;
-            padding: 0 10px 3px 0;
+
             margin-bottom: 15px;
+            padding: 0 10px 3px 0;
+
+            @include font-size(40px);
         }
 
-        .createdAt {
-            display: block;
-            color: lighten($dark, 20);
-            letter-spacing: 0.15em;
+        .createdAt
+        {
             font-family: $font-sans;
+
+            display: block;
+
+            letter-spacing: .15em;
+
+            color: lighten($dark, 20);
         }
 
-        .titlepic {
+        .titlepic
+        {
             display: block;
+
             max-height: 300px;
         }
 
-        p {
-            @include font-size(20px);
+        p
+        {
             margin: 1em;
+
+            @include font-size(20px);
+        }
+
+        a
+        {
+            color: $color3;
         }
     }
 }
 
-.pull-left {
+ul.tags {
+    display: block;
+    list-style-type: none;
+
+    padding-left: 0;
+    margin: 2em 0.5em;
+
+    li {
+        color: white;
+        background-color: $color3;
+        padding: 0.2em;
+        border-radius: $border-radius-default;
+        display: inline-block;
+        margin: 0 0.2em;
+        font-family: $font-sans;
+        text-transform: uppercase;
+
+        &::before {
+            content: '#'
+        }
+
+    }
+}
+
+.pull-left
+{
     float: left;
 }
 
-.pull-right {
+.pull-right
+{
     float: right;
 }
 

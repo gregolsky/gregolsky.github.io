@@ -3,3 +3,7 @@ block prepend content
   h2= title
   .createdAt= createdAt
   :markdown
+block append content
+  ul.tags
+    each tag in tags
+      li= tag
