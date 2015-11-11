@@ -158,7 +158,6 @@ nav {
             @include font-size(30px);
         }
 
-        font-family: $font-sans;
         letter-spacing: 0.1em;
         height: 1.5em;
         margin: 0;
@@ -166,6 +165,7 @@ nav {
 
         li {
             display: block;
+            font-family: $font-sans;
             color: $white;
             float: left;
             padding-right: 15px;

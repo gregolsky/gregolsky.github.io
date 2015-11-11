@@ -51,6 +51,11 @@ footer
             @include font-size(40px);
         }
 
+        pre {
+            margin: 1em;
+            padding: 1em;
+        }
+
         .createdAt
         {
             font-family: $font-sans;
