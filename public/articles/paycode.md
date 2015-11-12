@@ -11,7 +11,7 @@ The name and amount are simple to remember, but passing the account number is ha
 |PL|35000000000000370264110315|010000|Grzegorz Lachowski|transfer title|||
 ```
 
-And looks like this:
+And the code itself looks like this:
 
 <center>![|PL|35000000000000370264110315|010000|Grzegorz Lachowski|transfer title|||](http://i.imgur.com/QMSXFz2.png "Money transfer QR code example")</center>
 
