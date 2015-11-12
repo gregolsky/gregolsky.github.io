@@ -15,7 +15,7 @@ If we have cash, then we can just use it and be done with this, however I am one
 </ul>
 <p>The name and amount are simple to remember, but passing the account number is hard and error prone. Copy pasting does not help much with this. For access to your online bank account you can use your computer or.. your phone. Wait a sec. Can we simplify this? You do pay your bills using <a href="https://en.wikipedia.org/wiki/QR_code">QR codes</a> right? What are QR codes? Here&#39;s <a href="https://en.wikipedia.org/wiki/QR_code">QR code article from Wikipedia</a>. Basically QR code is a little piece of information encoded into <del>an image containing multiple black and white square fields</del> a square barcode. Among other things it can hold your money transfer information. E.g. a money transfer QR code data look like this:</p>
 <pre><code>|PL|35000000000000370264110315|010000|Grzegorz Lachowski|transfer title|||
-</code></pre><p>And looks like this:</p>
+</code></pre><p>And the code itself looks like this:</p>
 <center><img src="http://i.imgur.com/QMSXFz2.png" alt="|PL|35000000000000370264110315|010000|Grzegorz Lachowski|transfer title|||" title="Money transfer QR code example"></center>
 
 <p>It is a simple |-separated text format encoded into a barcode. Only required fields have been filled in:</p>
