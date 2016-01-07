@@ -23,7 +23,9 @@ html.no-js
     include _partials/header.jade
     div(role='main')
       article
-        block content
+        if current.path[0] == 'articles'
+          block content
+        else
           != yield
     include _partials/footer.jade
 

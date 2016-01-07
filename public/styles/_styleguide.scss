@@ -6,17 +6,24 @@ h2,
 h3,
 h4
 {
-    font-family: $font-sans;
-
+    font-family: $font-header;
+    font-weight: 600;
     margin: 0;
 }
 
 p, ul li, ol li
 {
-    font-family: $font-serif;
+    font-family: $font-regular;
     font-weight: 300;
     text-align: justify;
     line-height: 1.5em;
+}
+
+pre {
+    margin: 0.5em;
+    padding: 0.5em;
+    border: 2px dashed lighten($color5, 20);
+    background-color: lighten($color5, 40);
 }
 
 code {
@@ -26,12 +33,13 @@ code {
 a
 {
     font-family: inherit;
-
     padding: 0 .1em;
-
-    text-decoration: underline;
-
+    text-decoration: none;
     color: inherit;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 %card

@@ -98,18 +98,15 @@ header .wrap {
     {
         display: inline-block;
         color: $white;
-        font-family: $font-sans;
-        font-variant: small-caps;
-        letter-spacing: 2px;
-        font-size: 4.5vw;
+        font-size: 5.4vw;
         border-radius: $border-radius-default;
 
         @include bp-md {
-            font-size: 2.6vw;
+            font-size: 3.2vw;
         }
 
         @include bp-lg {
-            font-size: 2vw;
+            font-size: 3vw;
         }
 
         small {
@@ -118,6 +115,8 @@ header .wrap {
             font-variant: normal;
             font-family: inherit;
             font-size: 0.6em;
+            position: absolute;
+            right: 5%;
 
             @include bp-md {
                 display: inline-block;
@@ -165,7 +164,7 @@ nav {
 
         li {
             display: block;
-            font-family: $font-sans;
+            font-family: $font-header;
             color: $white;
             float: left;
             padding-right: 15px;

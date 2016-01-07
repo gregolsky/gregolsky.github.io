@@ -1,10 +1,9 @@
 
-
-$color1: #363537;
-$color2: #272838;
-$color3: #53131E;
-$color4: #fff249;
-$color5: #483D3F;
+$color1: #5B5B5B;
+$color2: #001408;
+$color3: #ffffff;
+$color4: #FF6E35;
+$color5: #7D7C7A;
 
 $white: #fefefe;
 $light: $white;
@@ -12,7 +11,7 @@ $dark: $color1;
 
 $bg: $color1;
 $primary: $color4;
-$special: $color3;
+$special: $color4;
 
 $primary-front: $color2;
 $primary-bg: $color4;
@@ -26,5 +25,5 @@ $content-width-lg: 60%;
 
 $border-radius-default: 3px;
 
-$font-sans: 'Oswald', 'Arial', sans-serif;
-$font-serif: 'Quattrocento', 'Verdana', serif;
+$font-header: 'Raleway';
+$font-regular: 'Cabin';

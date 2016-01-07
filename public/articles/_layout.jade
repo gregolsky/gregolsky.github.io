@@ -1,9 +1,14 @@
 extends ../_layout
-block prepend content
+
+block content
   h2= title
-  .createdAt= createdAt
-  :markdown
-block append content
+  .info
+    .createdAt= createdAt
+  .content
+    :markdown
+    != yield
+
+append content
   ul.tags
     each tag in tags
       li= tag

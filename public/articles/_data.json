@@ -14,5 +14,18 @@
         "description": "On how to connect qrcodes and money together to simplify your life.",
         "tags": [ "qrcode", "money transfer" ],
         "refs": []
+    },
+    "apps-launcher-2-0": {
+        "createdAt": "2016-01-06",
+        "title": "Quick access to your Chrome apps",
+        "pic": "https://lh4.googleusercontent.com/K7zg9sjegQy14bNszrXedygfCEQcHZFXe_cYj2P0Dn1oEI0kosO1pZbys4trqgI1YdPhuzLwMnI=s460-h340-e365",
+        "description": "Apps Launcher Chrome extension rewrite",
+        "tags": [ "chrome", "extension", "apps", "launcher", "shortcut" ],
+        "refs": [
+            {
+                "name": "Apps Launcher in Chrome Webstore",
+                "link": "https://chrome.google.com/webstore/detail/apps-launcher/ijmgkhchjindcjamnckoiahagecjnkdc"
+            }
+        ]
     }
 }

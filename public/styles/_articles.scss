@@ -9,7 +9,7 @@ ul.articles
     list-style-type: none;
 
     @extend %clearfix;
-    $article-width: 250px;
+    $article-width: 230px;
     $article-height: $article-width / 2;
 
     li
@@ -25,7 +25,7 @@ ul.articles
 
         .article
         {
-            font-family: 'Roboto';
+            font-family: $font-regular;
 
             position: relative;
 

@@ -27,11 +27,25 @@ footer
 
     article
     {
+        .content {
+            ul {
+                list-style: none;
+
+                li {
+                    &:before {
+                        content: "\272E";
+                        margin: 0 1em;
+                        color: $special;
+                    }
+                }
+            }
+        }
+
         z-index: 100;
 
         min-height: 500px;
         margin: 0 auto;
-        padding: 3em 3em;
+        padding: 3em 6em;
 
         color: darken($dark, 15);
         background-color: white;
@@ -41,29 +55,20 @@ footer
 
         h2
         {
-            font-variant: small-caps;
-
             display: inline-block;
+            text-transform: lowercase;
 
             margin-bottom: 15px;
-            padding: 0 10px 3px 0;
+            padding: 0 10px 5px 0;
 
             @include font-size(40px);
         }
 
-        pre {
-            margin: 1em;
-            padding: 1em;
-        }
-
         .createdAt
         {
-            font-family: $font-sans;
-
+            font-family: $font-regular;
             display: block;
-
-            letter-spacing: .15em;
-
+            letter-spacing: .10em;
             color: lighten($dark, 20);
         }
 
@@ -76,34 +81,33 @@ footer
 
         p
         {
-            margin: 1em;
-
             @include font-size(20px);
         }
 
         a
         {
-            color: $color3;
+            color: $special;
         }
     }
 }
 
 ul.tags {
     display: block;
+    text-align: right;
     list-style-type: none;
 
     padding-left: 0;
-    margin: 2em 0.5em;
 
     li {
         color: white;
-        background-color: $color3;
-        padding: 0.2em;
+        font-size: smaller;
+        background-color: $special;
+        padding: 0.2em 0.4em;
         border-radius: $border-radius-default;
         display: inline-block;
         margin: 0 0.2em;
-        font-family: $font-sans;
-        text-transform: uppercase;
+        font-family: $font-header;
+        text-transform: lowercase;
 
         &::before {
             content: '#'
