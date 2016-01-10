@@ -71,7 +71,9 @@ header .wrap {
 
         text-align: right;
 
-        border: 3px solid $primary;
+        border-width: 2px;
+        border-style: solid;
+        border-color: $special;
 
         @include circle(80px);
 

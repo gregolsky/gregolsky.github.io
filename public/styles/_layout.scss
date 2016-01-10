@@ -4,6 +4,7 @@
 body
 {
     font-size: 16px;
+    -webkit-backface-visibility: hidden;
 
     position: relative;
 
@@ -45,7 +46,13 @@ footer
 
         min-height: 500px;
         margin: 0 auto;
-        padding: 3em 6em;
+
+        @include bp-sm {
+            padding: 1em;
+        }
+        @include bp-md {
+            padding: 3em 6em;
+        }
 
         color: darken($dark, 15);
         background-color: white;
