@@ -42,4 +42,43 @@ If we have cash, then we can just use it and be done with this, however I am one
 <p>At first it was a little Angular.js application with a pinch of JQuery and a grid from Bootstrap. It was fast to develop, but resulted in a quite heavy build. It was working, but was a little to slow to open for a popup with circa 15 icons.</p>
 <p>Time was passing, people were using it and installed it freaking 120k times, which is a huge success for me (for a project that&#39;s being developed in just my free time), so I decided to optimize it and rebuild it in vanilla JS and here it is. In version 2.0 the only client dependency is <a target="_blank" href="http://rubaxa.github.io/Sortable/"><em>Sortable</em></a> - a little, but great library for reordering items in lists and grids (without any dependencies!). As for transpilers <em>Apps Launcher</em> is using <a target="_blank" href="https://babeljs.io/"><em>Babel</em></a> and <a target="_blank" href="http://sass-lang.com/"><em>Sass</em></a>. It&#39;s also loading much faster. When I measured it, it was 72ms, while the old one sometimes reached 1s or more.</p>
 <p>It&#39;s always a great pleasure to create something, that works and makes your life easier and to learn something new along the way. I wrote it for myself, but I am really happy to see that there are people using it around the world. The source is on <a href="https://github.com/gregolsky/chrome-app-launcher">my GitHub</a> and it&#39;s free to <a href="https://chrome.google.com/webstore/detail/apps-launcher/ijmgkhchjindcjamnckoiahagecjnkdc">install from Chrome Webstore</a>.</p>
-]]></description><pubDate>Wed Jan 06 2016 01:00:00 GMT+0100 (CET)</pubDate><link>http://gregolsky.github.io/articles/apps-launcher-2-0</link><guid isPermaLink="true">http://gregolsky.github.io/articles/apps-launcher-2-0</guid></item></channel></rss>
+]]></description><pubDate>Wed Jan 06 2016 01:00:00 GMT+0100 (CET)</pubDate><link>http://gregolsky.github.io/articles/apps-launcher-2-0</link><guid isPermaLink="true">http://gregolsky.github.io/articles/apps-launcher-2-0</guid></item><item><title>TSLint rulez</title><description><![CDATA[<p>To write truly testable and easily understandable code among other things it is important to keep things short. And by that I don&#39;t mean to pack your functions in one line. Robert C. Martin (also known as Uncle Bob) once said:</p>
+<blockquote>
+<p>The first rule of functions is that they should be small. The second rule of functions is that they should be smaller than that. Functions should not be 100 lines long. Functions should hardly ever be 20 lines long.</p>
+</blockquote>
+<p>That was something I wanted to enforce in TypeScript project I was working on and I thought it could be easily done using a linter. For TypeScript there&#39;s <em><a href="https://www.npmjs.com/package/tslint">TSLint</a></em>, for ES6 - <em>ESLint</em>. Unfortunately there was no such rule validating lines number of a function. There&#39;s one rule called <code>max-line-length</code>, which makes sure you don&#39;t write too long lines (horizontal length), however there was none for vertical function length. For <em>ESLint</em> I saw one rule checking the complexity and one checking the number of statements, but it wasn&#39;t the same. Well, since you can write custom rules for <em>TSLint</em> I launched my editor and started to code my first custom <em>TSLint</em> rule.</p>
+<p>There are 3 repositories containing <em>TSLint</em> rules:</p>
+<ul>
+<li><a href="https://github.com/palantir/tslint">the TSLint repository itself</a></li>
+<li><a href="https://github.com/buzinas/tslint-eslint-rules">tslint-eslint-rules</a></li>
+<li><a href="https://github.com/Microsoft/tslint-microsoft-contrib">tslint-microsoft-contrib</a></li>
+</ul>
+<p>Since the last one included some extra <code>grunt</code> tasks for scaffolding a new rule and some pleasing test infrastructure I went there directly, cloned it and coded away. Once you clone <code>tslint-microsoft-contrib</code> repo and install NPM packages to create a new rule use <code>create-rule</code> Grunt task:</p>
+<pre><code>$ grunt create-rule --rule-name max-func-body-length
+</code></pre><p>It is going to create a <code>src/maxFuncBodyLengthRule.ts</code> file where you implement your rule and a unit test file under <code>test/MaxFuncBodyLengthRuleTests.ts</code>. Basically you just need to override <code>visitX</code> methods of your rule&#39;s walker class, add failures to linting result and that&#39;s it. You can find detailed information on creating custom rules <a href="https://github.com/palantir/tslint#writing-custom-rules">here</a>. And here&#39;s my original <a href="https://github.com/Microsoft/tslint-microsoft-contrib/pull/103">PR</a> and the merged contribution - <a href="https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/src/maxFuncBodyLengthRule.ts">rule source</a> and <a href="https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/tests/MaxFuncBodyLengthRuleTests.ts">unit tests</a>.</p>
+<p>As for this rule&#39;s options in <code>tslint.json</code> config file you can specify the general max length like this:</p>
+<ul>
+<li>to enforce 20 lines number limit on all functions including methods and arrow functions<pre><code>&quot;max-func-body-length&quot;: [ true, 20 ]
+</code></pre></li>
+<li>to enforce limits as follows: 20 for loose functions, 10 for arrow functions, 15 for methods.<pre><code class="language-json">&quot;max-func-body-length&quot;: [ true, {
+    &quot;func-body-length&quot;: 20,
+    &quot;arrow-body-length&quot;: 10,
+    &quot;method-body-length&quot;: 15
+    }
+  ]
+</code></pre>
+</li>
+</ul>
+<p>There&#39;s one more switch here that may become handy when running this rule through unit tests code. Since e.g. <code>mocha</code> test fixtures are provided as functions to <em>describe()</em> function they can get pretty lengthy and will exceed our limits for sure. To avoid validation of such fixtures one can pass a regex string to <em>ignore-parameters-to-function-regex</em>. Linter won&#39;t validate functions passed to function, which names match that regex. To fix validation of your <code>mocha</code> tests just use it like this:</p>
+<pre><code class="language-json">&quot;max-func-body-length&quot;: [ true, 20, {
+        &quot;ignore-parameters-to-function-regex&quot;: &quot;describe&quot;
+    }
+]
+</code></pre>
+<p>Linter messages are going to look similarly to:</p>
+<pre><code>$ tslint -r tslint-rules aaa.ts
+aaa.ts[6, 5]: Max constructor body length exceeded in class John - max: 5, actual: 7
+aaa.ts[16, 1]: Max function body length exceeded in function magic() - max: 5, actual: 21
+aaa.ts[22, 13]: Max arrow function body length exceeded - max: 5, actual: 7
+</code></pre><p>Happy linting!</p>
+]]></description><pubDate>Sat Mar 05 2016 01:00:00 GMT+0100 (CET)</pubDate><link>http://gregolsky.github.io/articles/tslint-rulez</link><guid isPermaLink="true">http://gregolsky.github.io/articles/tslint-rulez</guid></item></channel></rss>
