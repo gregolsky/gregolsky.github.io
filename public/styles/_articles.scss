@@ -36,6 +36,28 @@ ul.articles
 
             @extend %card;
 
+            &:before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 10;
+                background: transparent;
+                transition: background .1s linear;
+            }
+
+            &:hover:before {
+                background: transparentize($color4, .5);
+            }
+
+            &:hover {
+                transform: scale(1.05);
+                border: 1px solid $color4;
+            }
+
             .title
             {
                 position: relative;

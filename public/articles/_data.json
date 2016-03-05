@@ -19,13 +19,26 @@
         "createdAt": "2016-01-06",
         "title": "Quick access to your Chrome apps",
         "pic": "https://lh4.googleusercontent.com/K7zg9sjegQy14bNszrXedygfCEQcHZFXe_cYj2P0Dn1oEI0kosO1pZbys4trqgI1YdPhuzLwMnI=s460-h340-e365",
-        "description": "Apps Launcher Chrome extension",
+        "description": "apps launcher chrome extension",
         "tags": [ "chrome", "extension", "apps", "launcher", "shortcut" ],
         "refs": [
             {
-                "name": "Apps Launcher in Chrome Webstore",
+                "name": "apps launcher in chrome webstore",
                 "link": "https://chrome.google.com/webstore/detail/apps-launcher/ijmgkhchjindcjamnckoiahagecjnkdc"
             }
         ]
+    },
+    "tslint-rulez": {
+        "createdAt": "2016-03-05",
+        "title": "TSLint rulez",
+        "pic": "http://cdn-ak.f.st-hatena.com/images/fotolife/K/KatsuYuzu/20150215/20150215015258.png",
+        "tags": [ "tslint", "function length", "tslint-microsoft-contrib" ],
+        "refs": [
+            {
+                "name": "tslint-microsoft-contrib - A set of TSLint rules used on some Microsoft projects",
+                "link": "https://github.com/Microsoft/tslint-microsoft-contrib"
+            }
+        ]
+
     }
 }

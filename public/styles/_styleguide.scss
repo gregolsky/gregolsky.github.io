@@ -54,13 +54,4 @@ a
     border-radius: $border-radius-default;
 
     @include material-shadow(2);
-
-    &:hover
-    {
-        z-index: 1000;
-
-        transition: .3s;
-        transition-timing-function: ease-in-out;
-        transform: scale(1.2);
-    }
 }
