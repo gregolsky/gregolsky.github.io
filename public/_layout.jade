@@ -11,6 +11,8 @@ html.no-js
     link(rel="stylesheet" href="/styles/main.css")
     link(rel="stylesheet" href="/styles/vendor.css")
     
+    block head
+
     //-script(src='js/vendor/modernizr-2.7.1.min.js')
   body
     <!--[if lt IE 8]>
@@ -33,6 +35,8 @@ html.no-js
     script window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')
     //-script(src='js/plugins.js')
     //-script(src='js/script.js')
+    
+    block scripts
 
     //- Google Analytics: change UA-XXXXX-X to be your site's ID.
     //-

@@ -1,7 +1,11 @@
 h2 articles
 
 ul.articles
-  each article, slug in public.articles._data
+  - var articlesData = public.articles._data;
+  - var articleSlugs = Object.keys(articlesData);
+  - articleSlugs.reverse();
+  each slug in articleSlugs
+    - var article = articlesData[slug];
     li
       a(href="/articles/#{ slug }.html")
         .article

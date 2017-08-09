@@ -15,7 +15,7 @@ Since the last one included some extra `grunt` tasks for scaffolding a new rule 
 $ grunt create-rule --rule-name max-func-body-length
 ```
 
-It is going to create a `src/maxFuncBodyLengthRule.ts` file where you implement your rule and a unit test file under `test/MaxFuncBodyLengthRuleTests.ts`. Basically you just need to override `visitX` methods of your rule's walker class, add failures to linting result and that's it. Here's my original [PR](https://github.com/Microsoft/tslint-microsoft-contrib/pull/103) and the merged contribution - [rule source](https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/src/maxFuncBodyLengthRule.ts) and [unit tests](https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/tests/MaxFuncBodyLengthRuleTests.ts).
+It is going to create a `src/maxFuncBodyLengthRule.ts` file where you implement your rule and a unit test file under `test/MaxFuncBodyLengthRuleTests.ts`. Basically you just need to override `visitX` methods of your rule's walker class, add failures to linting result and that's it. You can find detailed information on creating custom rules [here](https://github.com/palantir/tslint#writing-custom-rules). And here's my original [PR](https://github.com/Microsoft/tslint-microsoft-contrib/pull/103) and the merged contribution - [rule source](https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/src/maxFuncBodyLengthRule.ts) and [unit tests](https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/tests/MaxFuncBodyLengthRuleTests.ts).
 
 As for this rule's options in `tslint.json` config file you can specify the general max length like this:
 - to enforce 20 lines number limit on all functions including methods and arrow functions
