@@ -1,98 +1,147 @@
 @import 'mixins';
 @import 'variables';
-
-body
-{
-    font-size: 16px;
+body {
+    font-size: 14px;
     -webkit-backface-visibility: hidden;
-
     position: relative;
-
     margin: 0;
     padding: 0;
-
     background-color: #eee;
     background-image: url('../images/textured_paper.png');
-
     @extend %clearfix;
 }
 
-footer
-{
+footer {
     height: 50px;
 }
 
-[role='main']
-{
+[role='main'] {
     width: 100%;
-
-    article
-    {
+    article {
         .content {
             ul {
                 list-style: none;
-
                 li {
                     &:before {
-                        content: "\272E";
-                        margin: 0 1em;
+                        content: "\2022";
+                        margin: 0 .5em 0 1em;
                         color: $special;
                     }
                 }
             }
+            ul,
+            ol {
+                display: block;
+                padding: 15px;
+                background: #fff;
+                border-radius: 2px;
+                display: block;
+                margin: 1rem;
+                position: relative;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+                transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+                li {
+                    font-family: $font-header;
+                    font-weight: normal;
+                }
+            }
+            ol {
+                counter-reset: ol-counter;
+                list-style-type: none;
+                li:before {
+                    content: counter(ol-counter) ".";
+                    counter-increment: ol-counter;
+                    margin: 0 .5em 0 1em;
+                }
+            }
         }
-
         z-index: 100;
-
         min-height: 500px;
         margin: 0 auto;
-
         @include bp-sm {
             padding: 1em;
         }
         @include bp-md {
             padding: 3em 6em;
         }
-
-        color: darken($dark, 15);
+        color: darken($dark,
+        15);
         background-color: white;
-
         @extend %content-width;
         @include material-shadow(2);
-
-        h2
-        {
-            display: inline-block;
-            text-transform: lowercase;
-
+        h2 {
+            text-transform: capitalize;
             margin-bottom: 15px;
             padding: 0 10px 5px 0;
-
             @include font-size(40px);
         }
-
-        .createdAt
-        {
+        .coverpic {
+            display: block;
+            margin: auto;
+            max-width: 90%;
+        }
+        .createdAt {
             font-family: $font-regular;
             display: block;
             letter-spacing: .10em;
             color: lighten($dark, 20);
         }
-
-        .titlepic
-        {
+        .titlepic {
             display: block;
-
             max-height: 300px;
         }
-
-        p
-        {
-            @include font-size(20px);
+        p {
+            @include font-size(16px);
+            &:first-child:first-letter {
+                color: $color2;
+                float: left;
+                font-size: 80px;
+                line-height: 60px;
+                padding-top: 3px;
+                padding-right: 8px;
+                padding-left: 3px;
+            }
         }
 
-        a
-        {
+        blockquote {
+            position: relative;
+            font-style: italic;
+            width: 85%;
+            font-weight: bold;
+            padding: 5px 20px;
+
+            &:before {
+                content: '"';
+                display: block;
+                position: absolute;
+                left: -10px;
+                top: 10px;
+                font-size: 30px;
+            }
+
+            &:after {
+                content: '"';
+                font-size: 30px;
+                display: block;
+                position: absolute;
+                right: -10px;
+                top: 10px;
+            }
+
+            p {
+
+                &:first-child:first-letter {
+                    color: initial;
+                    float: none;
+                    font-size: initial;
+                    line-height: initial;
+                    padding-top: initial;
+                    padding-right: initial;
+                    padding-left: initial;
+                }
+            }
+        }
+        a {
             color: $special;
         }
     }
@@ -102,9 +151,7 @@ ul.tags {
     display: block;
     text-align: right;
     list-style-type: none;
-
     padding-left: 0;
-
     li {
         color: white;
         font-size: smaller;
@@ -115,21 +162,17 @@ ul.tags {
         margin: 0 0.2em;
         font-family: $font-header;
         text-transform: lowercase;
-
         &::before {
             content: '#'
         }
-
     }
 }
 
-.pull-left
-{
+.pull-left {
     float: left;
 }
 
-.pull-right
-{
+.pull-right {
     float: right;
 }
 

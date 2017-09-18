@@ -1,0 +1,45 @@
+<!DOCTYPE html><html class="no-js"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><base href="/"><link rel="stylesheet" href="styles/main.css"><link rel="stylesheet" href="styles/vendor.css"><title>TSLint rulez</title><meta keywords="tslint function length tslint-microsoft-contrib"><meta description="Few words about Harp - a web server simplifying frontend development workflow."></head><body><!--[if lt IE 8]><p class="browsehappy">You are using an <strong>outdated</strong> browser.
+Please <a href="http://browsehappy.com/">upgrade your browser</a>
+to improve your experience.</p><![endif]--><header><div class="bg"></div><div class="wrap"><div class="cols"> <div class="col"><img class="portrait" src="images/glbw.jpg" alt="Grzegorz Lachowski"></div><div class="col"><div class="title"><h1>My pet projects' little zoo<br><small>Grzegorz Lachowski</small></h1></div></div></div><nav role="navigation"><h2 class="sr-only">Menu</h2><ul class="menu"><li> <a href="/about.html">About</a></li><li> <a href="https://github.com/gregolsky">Projects</a></li><li><a href="/">Articles      </a></li><li><a href="/feed.xml">RSS      </a></li></ul></nav></div></header><div role="main"><article><div class="info"><div class="createdAt">2016-03-05</div><h2>TSLint rulez</h2><img class="coverpic" src="http://cdn-ak.f.st-hatena.com/images/fotolife/K/KatsuYuzu/20150215/20150215015258.png" alt="TSLint rulez"></div><div class="content"><p>To write truly testable and easily understandable code among other things it is important to keep things short. And by that I don't mean to pack your functions in one line. Robert C. Martin (also known as Uncle Bob) once said:</p>
+<blockquote>
+<p>The first rule of functions is that they should be small. The second rule of functions is that they should be smaller than that. Functions should not be 100 lines long. Functions should hardly ever be 20 lines long.</p>
+</blockquote>
+<p>That was something I wanted to enforce in TypeScript project I was working on and I thought it could be easily done using a linter. For TypeScript there's <em><a href="https://www.npmjs.com/package/tslint">TSLint</a></em>, for ES6 - <em>ESLint</em>. Unfortunately there was no such rule validating lines number of a function. There's one rule called <code>max-line-length</code>, which makes sure you don't write too long lines (horizontal length), however there was none for vertical function length. For <em>ESLint</em> I saw one rule checking the complexity and one checking the number of statements, but it wasn't the same. Well, since you can write custom rules for <em>TSLint</em> I launched my editor and started to code my first custom <em>TSLint</em> rule.</p>
+<p>There are 3 repositories containing <em>TSLint</em> rules:</p>
+<ul>
+<li><a href="https://github.com/palantir/tslint">the TSLint repository itself</a></li>
+<li><a href="https://github.com/buzinas/tslint-eslint-rules">tslint-eslint-rules</a></li>
+<li><a href="https://github.com/Microsoft/tslint-microsoft-contrib">tslint-microsoft-contrib</a></li>
+</ul>
+<p>Since the last one included some extra <code>grunt</code> tasks for scaffolding a new rule and some pleasing test infrastructure I went there directly, cloned it and coded away. Once you clone <code>tslint-microsoft-contrib</code> repo and install NPM packages to create a new rule use <code>create-rule</code> Grunt task:</p>
+<pre><code>$ grunt create-rule --rule-name max-func-body-length
+</code></pre>
+<p>It is going to create a <code>src/maxFuncBodyLengthRule.ts</code> file where you implement your rule and a unit test file under <code>test/MaxFuncBodyLengthRuleTests.ts</code>. Basically you just need to override <code>visitX</code> methods of your rule's walker class, add failures to linting result and that's it. You can find detailed information on creating custom rules <a href="https://github.com/palantir/tslint#writing-custom-rules">here</a>. And here's my original <a href="https://github.com/Microsoft/tslint-microsoft-contrib/pull/103">PR</a> and the merged contribution - <a href="https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/src/maxFuncBodyLengthRule.ts">rule source</a> and <a href="https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/tests/MaxFuncBodyLengthRuleTests.ts">unit tests</a>.</p>
+<p>As for this rule's options in <code>tslint.json</code> config file you can specify the general max length like this:</p>
+<ul>
+<li>to enforce 20 lines number limit on all functions including methods and arrow functions<pre><code>&quot;max-func-body-length&quot;: [ true, 20 ]
+</code></pre>
+</li>
+<li>to enforce limits as follows: 20 for loose functions, 10 for arrow functions, 15 for methods.<pre><code class="language-json">&quot;max-func-body-length&quot;: [ true, {
+    &quot;func-body-length&quot;: 20,
+    &quot;arrow-body-length&quot;: 10,
+    &quot;method-body-length&quot;: 15
+    }
+  ]
+</code></pre>
+</li>
+</ul>
+<p>There's one more switch here that may become handy when running this rule through unit tests code. Since e.g. <code>mocha</code> test fixtures are provided as functions to <em>describe()</em> function they can get pretty lengthy and will exceed our limits for sure. To avoid validation of such fixtures one can pass a regex string to <em>ignore-parameters-to-function-regex</em>. Linter won't validate functions passed to function, which names match that regex. To fix validation of your <code>mocha</code> tests just use it like this:</p>
+<pre><code class="language-json">&quot;max-func-body-length&quot;: [ true, 20, {
+        &quot;ignore-parameters-to-function-regex&quot;: &quot;describe&quot;
+    }
+]
+</code></pre>
+<p>Linter messages are going to look similarly to:</p>
+<pre><code>$ tslint -r tslint-rules aaa.ts
+aaa.ts[6, 5]: Max constructor body length exceeded in class John - max: 5, actual: 7
+aaa.ts[16, 1]: Max function body length exceeded in function magic() - max: 5, actual: 21
+aaa.ts[22, 13]: Max arrow function body length exceeded - max: 5, actual: 7
+</code></pre>
+<p>Happy linting!</p>
+</div><ul class="tags"><li>tslint</li><li>function length</li><li>tslint-microsoft-contrib</li></ul></article></div><footer> </footer><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script></body></html>

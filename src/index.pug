@@ -1,16 +1,25 @@
-h2 articles
+extends _layout
 
-ul.articles
-  - var articlesData = public.articles._data;
-  - var articleSlugs = Object.keys(articlesData);
-  - articleSlugs.reverse();
-  each slug in articleSlugs
-    - var article = articlesData[slug];
-    li
-      a(href="/articles/#{ slug }.html")
-        .article
-          .title #{ article.title }
-          if article.pic
-            .cover(style="background-image: url('#{ article.pic }');")
-          else
-           .cover
+block head
+    title= blogTitle
+    meta(name='description', content='About me coding, breaking, integrating, learning new stuff and tech.')
+
+block content
+    h2 articles
+
+    ul.articles
+      - var articlesData = articles;
+      - var articleSlugs = Object.keys(articlesData);
+      - articleSlugs.reverse();
+      each slug in articleSlugs
+        - var article = articlesData[slug];
+        - var title = article.title
+        - var articlePic = article.pic
+        li
+          a(href=`/articles/${ slug }.html`)
+            .article
+              .title=title
+              if article.pic
+                .cover(style=`background-image: url('${ articlePic }');`)
+              else
+               .cover

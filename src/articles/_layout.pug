@@ -1,12 +1,18 @@
 extends ../_layout
 
+block head
+    title= title
+    - var keywords = tags.join(' ')
+    meta(keywords=keywords)
+    meta(description=description)
+
 block content
-  h2= title
-  .info
-    .createdAt= createdAt
-  .content
-    :markdown
-    != yield
-  ul.tags
-    each tag in tags
-      li= tag
+    .info
+        .createdAt= createdAt
+        h2= title
+        img.coverpic(src= pic, alt= title)
+    .content
+        block article
+    ul.tags
+        each tag in tags
+            li= tag

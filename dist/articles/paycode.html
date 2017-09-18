@@ -1,0 +1,33 @@
+<!DOCTYPE html><html class="no-js"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><base href="/"><link rel="stylesheet" href="styles/main.css"><link rel="stylesheet" href="styles/vendor.css"><title>Paycode or how to photocode your money transfers</title><meta keywords="qrcode money transfer"><meta description="On how to connect qrcodes and money together to simplify your life."></head><body><!--[if lt IE 8]><p class="browsehappy">You are using an <strong>outdated</strong> browser.
+Please <a href="http://browsehappy.com/">upgrade your browser</a>
+to improve your experience.</p><![endif]--><header><div class="bg"></div><div class="wrap"><div class="cols"> <div class="col"><img class="portrait" src="images/glbw.jpg" alt="Grzegorz Lachowski"></div><div class="col"><div class="title"><h1>My pet projects' little zoo<br><small>Grzegorz Lachowski</small></h1></div></div></div><nav role="navigation"><h2 class="sr-only">Menu</h2><ul class="menu"><li> <a href="/about.html">About</a></li><li> <a href="https://github.com/gregolsky">Projects</a></li><li><a href="/">Articles      </a></li><li><a href="/feed.xml">RSS      </a></li></ul></nav></div></header><div role="main"><article><div class="info"><div class="createdAt">2015-11-11</div><h2>Paycode or how to photocode your money transfers</h2><img class="coverpic" src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Coins.jpg" alt="Paycode or how to photocode your money transfers"></div><div class="content"><p>Returning money you borrowed from a friend is hard, isn't it? No, I am not going to tackle financial or social reasons for not returning the money. I mean it in a technical kind of way and I think of those little loans we make, when it's just more practical for one person to pay for the thing and then the others need to return their part. What do we do then?
+If we have cash, then we can just use it and be done with this, however I am one of those guys that do not carry cash around. We have cards nowadays right? But you can't use it to give the money back to your friend. So at minimum you need to:</p>
+<ul>
+<li>know his name,</li>
+<li>know his acc#,</li>
+<li>know the amount,</li>
+<li>access your bank account to make the money transfer</li>
+</ul>
+<p>The name and amount are simple to remember, but passing the account number is hard and error prone. Copy pasting does not help much with this. For access to your online bank account you can use your computer or.. your phone. Wait a sec. Can we simplify this? You do pay your bills using <a href="https://en.wikipedia.org/wiki/QR_code">QR codes</a> right? What are QR codes?</p>
+<p>Here's <a href="https://en.wikipedia.org/wiki/QR_code">QR code article from Wikipedia</a>. Basically QR code is a little piece of information encoded into a square barcode. Among other things it can hold your money transfer information. E.g. a money transfer QR code data look like this:</p>
+<pre><code>|PL|35000000000000370264110315|010000|Grzegorz Lachowski|transfer title|||
+</code></pre>
+<p>And the code itself looks like this:</p>
+<p><img src="http://i.imgur.com/QMSXFz2.png" alt="|PL|35000000000000370264110315|010000|Grzegorz Lachowski|transfer title|||" title="Money transfer QR code example"></p>
+<p>It is a simple |-separated text format encoded into a barcode. Only required fields have been filled in:</p>
+<ul>
+<li><code>PL</code> - a country code (ISO 3166-1 alfa-2),</li>
+<li><code>35000000000000370274110914</code> - acc# (26 numbers, this one's fake),</li>
+<li><code>010000</code> - amount field (this is the value of 100 zlotys),</li>
+<li><code>Grzegorz Lachowski</code> - transfer receiver name,</li>
+<li><code>transfer title</code> - transfer title :)</li>
+</ul>
+<p>Using QR codes for money transfer is very convenient. I pay my bills this way and you should too! Sadly I haven't seen an option anywhere to create your own money transfer QR codes. That's why I made PayCode. A little webapp to create your own money transfer QR codes. This is how it works:</p>
+<ol>
+<li>Go to <a href="http://gregolsky.github.io/paycode/">http://gregolsky.github.io/paycode/</a></li>
+<li>Fill in your transfer data - don't worry it does not save anything anywhere - it's client-side only.</li>
+<li>Click the submit button.</li>
+<li>You will be redirected to the unique page with the qr code, for which the link you can pass to your friends.</li>
+</ol>
+<p>That's it. It uses qrcode.js library, which uses canvas to generate the code. It's not perfect yet, but the basic functionality works. I still need to work on multi-lingual support, validation, shortening the unique URL and UTF-8 support in the transfer fields (QR code generation library I use does not support it yet). I hope it helps you in some way. Be sure to check the <a href="https://github.com/gregolsky/paycode">code on my GitHub</a>.</p>
+</div><ul class="tags"><li>qrcode</li><li>money transfer</li></ul></article></div><footer> </footer><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script></body></html>

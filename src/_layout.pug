@@ -3,13 +3,11 @@ html.no-js
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    title= blogTitle
-    meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     
     base(href="/")
-    link(rel="stylesheet" href="/styles/main.css")
-    link(rel="stylesheet" href="/styles/vendor.css")
+    link(rel="stylesheet" href="styles/main.css")
+    link(rel="stylesheet" href="styles/vendor.css")
     
     block head
 
@@ -22,14 +20,12 @@ html.no-js
       | to improve your experience.
     <![endif]-->
 
-    include _partials/header.jade
+    include _partials/header
     div(role='main')
       article
-        if current.path[0] == 'articles'
           block content
-        else
-          != yield
-    include _partials/footer.jade
+              
+    include _partials/footer
 
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
     script window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')

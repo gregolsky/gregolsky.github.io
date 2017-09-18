@@ -4,11 +4,11 @@ rss(version="2.0", xmlns:atom="http://www.w3.org/2005/Atom")
     title= blogTitle
     link= blogUrl
     description= blogSubtitle
-    atom:link(href="#{ blogUrl }/feed.xml", rel="self", type="application/rss+xml")
-    for post, slug in public.articles._data
+    atom:link(href=`${ blogUrl }/feed.xml`, rel="self", type="application/rss+xml")
+    for post, slug in articles
       item
         title= post.title
-        description <![CDATA[!{ partial('articles/' + slug) }]]>
+        description <![CDATA[!{ `${ post.description }` }]]>
         pubDate= new Date(post.createdAt)
-        link #{ blogUrl }/articles/#{ slug }
+        link= `${ blogUrl }/articles/${ slug }`
         guid(isPermaLink="true") #{ blogUrl }/articles/#{ slug }

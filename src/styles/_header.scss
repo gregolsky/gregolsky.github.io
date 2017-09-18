@@ -38,7 +38,7 @@ header
         background-position: center center;
 
         @include material-shadow(2);
-        @include animation('fade-in 3s ease-out 0s 1');
+        @include animation('fade-in 1s ease-out 0s 1');
     }
 }
 
