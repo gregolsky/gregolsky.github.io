@@ -13,7 +13,7 @@ const articles = (await getCollection('articles', ({ data }) => !data.draft))
   <Header />
   <main class="flex-1">
     <div class="max-w-3xl mx-auto px-6 md:px-10 py-10 md:py-14">
-      <h2 class="font-mono text-sm uppercase tracking-[0.2em] text-brand-fog/50 mb-8">Articles</h2>
+      <h2 class="font-mono text-sm text-brand-fog/60 mb-8 term-prompt">ls articles/</h2>
       <ul class="divide-y divide-brand-fog/10">
         {articles.map((article) => <ArticleCard article={article} />)}
       </ul>

@@ -41,9 +41,7 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
         {tags.length > 0 && (
           <ul class="flex flex-wrap gap-1.5 mt-3">
             {tags.map((tag) => (
-              <li class="text-xs uppercase tracking-wider font-mono text-brand-fog/50 border border-brand-fog/20 px-2 py-0.5 rounded-sm">
-                {tag}
-              </li>
+              <li class="term-tag">{tag}</li>
             ))}
           </ul>
         )}

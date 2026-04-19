@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import avatarSrc from '../assets/avatar.jpg';
+import ConwayLife from './ConwayLife.astro';
 
 interface Props {
   compact?: boolean;
@@ -23,6 +24,9 @@ const isActive = (href: string) =>
   >
     <!-- Gradient overlay: clears top, darkens toward bottom -->
     <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/25 to-brand-night/85"></div>
+
+    <!-- Conway's Game of Life -->
+    <ConwayLife />
 
     <!-- Nav — top right -->
     <nav class="absolute top-0 right-0 p-5 z-10" aria-label="Main navigation">
@@ -48,7 +52,7 @@ const isActive = (href: string) =>
           <h1 class="font-sans text-3xl md:text-4xl font-bold tracking-tightest text-brand-paper leading-tight">
             Grzegorz Lachowski
           </h1>
-          <p class="text-brand-fog/80 text-base mt-1.5 font-sans tracking-wide">
+          <p class="text-brand-fog/80 text-base mt-1.5 font-mono cursor-blink">
             Software developer · bug hunter 🪲 · sci-fi addict 🚀 · music lover 🎸 · father of 4 · Toruń, Poland
           </p>
         </div>

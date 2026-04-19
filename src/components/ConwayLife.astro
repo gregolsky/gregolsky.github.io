@@ -1,0 +1,130 @@
+<canvas
+  id="gol-canvas"
+  class="absolute inset-0 w-full h-full z-[1] cursor-crosshair"
+  aria-label="Conway's Game of Life — click or drag to draw cells"
+></canvas>
+
+<script>
+const canvas = document.getElementById('gol-canvas') as HTMLCanvasElement;
+const ctx = canvas.getContext('2d')!;
+
+const CELL = 14;
+const FPS = 8;
+const ALIVE_COLOR = 'rgba(232, 178, 106, 0.55)'; // brand-glow, amber
+const DEAD_COLOR  = 'rgba(0,0,0,0)';
+const INIT_DENSITY = 0.12;
+
+let cols = 0, rows = 0;
+let grid: Uint8Array;
+let next: Uint8Array;
+let painting = false;
+let paintState = 1; // 1=draw, 0=erase
+let raf: number;
+let lastTick = 0;
+
+function resize() {
+  cols = Math.floor(canvas.offsetWidth / CELL);
+  rows = Math.floor(canvas.offsetHeight / CELL);
+  canvas.width  = cols * CELL;
+  canvas.height = rows * CELL;
+  grid = new Uint8Array(cols * rows);
+  next = new Uint8Array(cols * rows);
+  // seed random cells
+  for (let i = 0; i < grid.length; i++) {
+    grid[i] = Math.random() < INIT_DENSITY ? 1 : 0;
+  }
+}
+
+function idx(c: number, r: number) {
+  return ((r + rows) % rows) * cols + ((c + cols) % cols);
+}
+
+function step() {
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      let n = 0;
+      for (let dr = -1; dr <= 1; dr++)
+        for (let dc = -1; dc <= 1; dc++)
+          if (dr !== 0 || dc !== 0) n += grid[idx(c + dc, r + dr)];
+      const alive = grid[idx(c, r)];
+      next[idx(c, r)] = alive ? (n === 2 || n === 3 ? 1 : 0) : (n === 3 ? 1 : 0);
+    }
+  }
+  const tmp = grid; grid = next; next = tmp;
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = ALIVE_COLOR;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (grid[idx(c, r)]) {
+        ctx.fillRect(c * CELL + 1, r * CELL + 1, CELL - 2, CELL - 2);
+      }
+    }
+  }
+}
+
+function tick(ts: number) {
+  raf = requestAnimationFrame(tick);
+  if (ts - lastTick < 1000 / FPS) return;
+  lastTick = ts;
+  step();
+  draw();
+}
+
+function cellAt(e: MouseEvent | Touch) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = cols / rect.width;
+  const scaleY = rows / rect.height;
+  const c = Math.floor((e.clientX - rect.left) * scaleX);
+  const r = Math.floor((e.clientY - rect.top)  * scaleY);
+  return { c, r };
+}
+
+function paint(e: MouseEvent | Touch) {
+  const { c, r } = cellAt(e);
+  if (c >= 0 && c < cols && r >= 0 && r < rows) {
+    grid[idx(c, r)] = paintState;
+    draw();
+  }
+}
+
+canvas.addEventListener('mousedown', (e) => {
+  const { c, r } = cellAt(e);
+  paintState = grid[idx(c, r)] ? 0 : 1;
+  painting = true;
+  paint(e);
+});
+canvas.addEventListener('mousemove', (e) => { if (painting) paint(e); });
+window.addEventListener('mouseup', () => { painting = false; });
+
+canvas.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  const t = e.touches[0];
+  const { c, r } = cellAt(t);
+  paintState = grid[idx(c, r)] ? 0 : 1;
+  painting = true;
+  paint(t);
+}, { passive: false });
+canvas.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  if (painting) paint(e.touches[0]);
+}, { passive: false });
+window.addEventListener('touchend', () => { painting = false; });
+
+const ro = new ResizeObserver(() => { resize(); draw(); });
+ro.observe(canvas);
+
+const io = new IntersectionObserver(([entry]) => {
+  if (entry.isIntersecting) {
+    raf = requestAnimationFrame(tick);
+  } else {
+    cancelAnimationFrame(raf);
+  }
+});
+io.observe(canvas);
+
+resize();
+raf = requestAnimationFrame(tick);
+</script>
