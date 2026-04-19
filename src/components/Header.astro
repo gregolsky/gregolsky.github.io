@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import avatarSrc from '../assets/avatar.jpg';
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+
+<header class="relative w-full overflow-hidden">
+  <!-- Hero image -->
+  <div
+    class:list={[
+      'relative bg-cover bg-center',
+      compact ? 'h-44' : 'h-[62vh] min-h-[380px]',
+    ]}
+    style="background-image: url('/images/umk.jpeg');"
+  >
+    <!-- Gradient overlay: clears top, darkens toward bottom -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/25 to-brand-night/85"></div>
+
+    <!-- Nav — top right -->
+    <nav class="absolute top-0 right-0 p-5 z-10" aria-label="Main navigation">
+      <ul class="flex items-center gap-6">
+        <li><a href="/" class:list={['nav-link', isActive('/') && !isActive('/about') && !isActive('/articles') && 'text-brand-glow']}>Articles</a></li>
+        <li><a href="/about" class:list={['nav-link', isActive('/about') && 'text-brand-glow']}>About</a></li>
+        <li><a href="https://github.com/gregolsky" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub</a></li>
+        <li><a href="/rss.xml" class="nav-link">RSS</a></li>
+      </ul>
+    </nav>
+
+    {!compact && (
+      <!-- Identity block — bottom left -->
+      <div class="absolute bottom-0 left-0 p-8 md:p-12 z-10 flex items-end gap-5">
+        <Image
+          src={avatarSrc}
+          alt="Grzegorz Lachowski"
+          width={96}
+          height={96}
+          class="w-20 h-20 md:w-24 md:h-24 rounded-full ring-1 ring-brand-fog/50 shrink-0 object-cover"
+        />
+        <div>
+          <h1 class="font-sans text-3xl md:text-4xl font-bold tracking-tightest text-brand-paper leading-tight">
+            Grzegorz Lachowski
+          </h1>
+          <p class="text-brand-fog/80 text-sm mt-1 font-sans tracking-wide">
+            Software developer · Toruń, Poland
+          </p>
+        </div>
+      </div>
+    )}
+
+    {compact && (
+      <div class="absolute bottom-0 left-0 p-5 md:p-8 z-10">
+        <a href="/" class="font-sans font-bold text-brand-paper/90 hover:text-brand-glow transition-colors tracking-tight text-lg">
+          Grzegorz Lachowski
+        </a>
+      </div>
+    )}
+  </div>
+</header>

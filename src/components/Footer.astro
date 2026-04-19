@@ -1,0 +1,14 @@
+---
+import SocialIcons from './SocialIcons.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-auto hairline">
+  <div class="max-w-3xl mx-auto px-6 md:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <SocialIcons />
+    <p class="text-brand-fog/50 text-xs font-mono">
+      &copy; {year} Grzegorz Lachowski · Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="hover:text-brand-glow transition-colors">Astro</a>
+    </p>
+  </div>
+</footer>

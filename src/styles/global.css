@@ -1,0 +1,37 @@
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource/source-serif-4/400.css';
+@import '@fontsource/source-serif-4/600.css';
+@import '@fontsource/source-serif-4/400-italic.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-brand-paper text-brand-night;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  html.dark {
+    @apply bg-brand-night text-brand-fog;
+  }
+  body {
+    @apply font-sans;
+  }
+  ::selection {
+    @apply bg-brand-glow/30 text-brand-night;
+  }
+  a {
+    @apply transition-colors;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply uppercase tracking-[0.15em] text-xs font-medium text-brand-paper/80 hover:text-brand-glow;
+  }
+  .hairline {
+    @apply border-t border-brand-fog/25;
+  }
+}

@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="404 — Not Found">
+  <Header compact />
+  <main class="flex-1 flex items-center">
+    <div class="max-w-3xl mx-auto px-6 md:px-10 py-20 text-center">
+      <p class="font-mono text-brand-glow text-6xl mb-4">🪲</p>
+      <h1 class="font-sans text-4xl font-bold tracking-tightest text-brand-paper mb-4">404</h1>
+      <p class="text-brand-fog/70 font-sans mb-8">Nothing to see here. This page doesn't exist.</p>
+      <a href="/" class="font-mono text-xs uppercase tracking-[0.2em] text-brand-fog/50 hover:text-brand-glow transition-colors">
+        ← Back to articles
+      </a>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
