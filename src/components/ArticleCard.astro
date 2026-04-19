@@ -18,9 +18,9 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
 
 <li>
   <a href={`/articles/${article.slug}/`} class="group block">
-    <article class="flex gap-5 py-6 hairline hover:bg-brand-fog/5 transition-colors px-2 -mx-2 rounded-sm">
+    <article class="flex gap-6 py-8 hairline hover:bg-brand-fog/5 transition-colors px-3 -mx-3 rounded-sm">
       {cover && (
-        <div class="shrink-0 w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-sm bg-brand-dusk/20">
+        <div class="shrink-0 w-28 h-28 sm:w-36 sm:h-36 overflow-hidden rounded-sm bg-brand-dusk/20">
           <Image
             src={cover}
             alt={coverAlt ?? title}
@@ -31,17 +31,17 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
         </div>
       )}
       <div class="flex-1 min-w-0">
-        <time class="font-mono text-xs text-brand-fog/50 tracking-wide">{formattedDate}</time>
-        <h2 class="font-sans text-base md:text-lg font-semibold text-brand-paper mt-1 leading-snug tracking-tight group-hover:text-brand-glow transition-colors line-clamp-2">
+        <time class="font-mono text-sm text-brand-fog/50 tracking-wide">{formattedDate}</time>
+        <h2 class="font-sans text-lg md:text-xl font-semibold text-brand-paper mt-1.5 leading-snug tracking-tight group-hover:text-brand-glow transition-colors line-clamp-2">
           {title}
         </h2>
-        <p class="text-brand-fog/70 text-sm mt-1.5 line-clamp-2 font-sans leading-relaxed">
+        <p class="text-brand-fog/70 text-base mt-2 line-clamp-2 font-sans leading-relaxed">
           {description}
         </p>
         {tags.length > 0 && (
-          <ul class="flex flex-wrap gap-1.5 mt-2.5">
+          <ul class="flex flex-wrap gap-1.5 mt-3">
             {tags.map((tag) => (
-              <li class="text-[10px] uppercase tracking-widest font-mono text-brand-fog/50 border border-brand-fog/20 px-1.5 py-0.5 rounded-sm">
+              <li class="text-xs uppercase tracking-wider font-mono text-brand-fog/50 border border-brand-fog/20 px-2 py-0.5 rounded-sm">
                 {tag}
               </li>
             ))}
