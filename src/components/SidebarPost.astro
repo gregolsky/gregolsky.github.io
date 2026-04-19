@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, cover, coverAlt } = post.data;
+
+const formattedDate = pubDate.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'short',
+  day: '2-digit',
+});
+---
+
+<li>
+  <a href={`/posts/${post.slug}/`} class="group flex gap-3 py-4 hairline hover:bg-brand-fog/5 transition-colors px-2 -mx-2 rounded-sm">
+    {cover && (
+      <div class="shrink-0 w-16 h-16 overflow-hidden rounded-sm bg-brand-dusk/20">
+        <Image
+          src={cover}
+          alt={coverAlt ?? title}
+          width={64}
+          height={64}
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+    )}
+    <div class="min-w-0">
+      <time class="font-mono text-xs text-brand-fog/40">{formattedDate}</time>
+      <h3 class="font-sans text-sm font-semibold text-brand-paper/90 mt-0.5 leading-snug group-hover:text-brand-glow transition-colors line-clamp-2">
+        {title}
+      </h3>
+      <p class="text-brand-fog/50 text-xs mt-1 line-clamp-2 font-sans leading-relaxed">
+        {description}
+      </p>
+    </div>
+  </a>
+</li>
