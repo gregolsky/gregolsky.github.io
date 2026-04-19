@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  article: CollectionEntry<'articles'>;
+  article: CollectionEntry<'posts'>;
 }
 
 const { article } = Astro.props;
@@ -17,7 +17,7 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
 ---
 
 <li>
-  <a href={`/articles/${article.slug}/`} class="group block">
+  <a href={`/posts/${article.slug}/`} class="group block">
     <article class="flex gap-6 py-8 hairline hover:bg-brand-fog/5 transition-colors px-3 -mx-3 rounded-sm">
       {cover && (
         <div class="shrink-0 w-28 h-28 sm:w-36 sm:h-36 overflow-hidden rounded-sm bg-brand-dusk/20">
