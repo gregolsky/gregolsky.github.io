@@ -112,12 +112,15 @@ const jsonLd = isArticle
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N7GDB1FP14"></script>
-    <script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-N7GDB1FP14"></script>
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-N7GDB1FP14');
+      gtag('config', 'G-N7GDB1FP14', {
+        cookie_domain: 'gregolsky.github.io',
+        cookie_flags: 'SameSite=None;Secure'
+      });
     </script>
   </head>
   <body class="min-h-screen flex flex-col">
