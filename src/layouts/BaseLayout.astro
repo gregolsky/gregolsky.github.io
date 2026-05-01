@@ -6,17 +6,73 @@ interface Props {
   description?: string;
   image?: string;
   articleDate?: Date;
+  articleUpdatedDate?: Date;
 }
 
 const {
   title,
   description = 'Software developer, team lead at RavenDB. Writing about code, tools, and things I find interesting.',
-  image = '/images/umk.jpeg',
+  image = '/images/og.png',
   articleDate,
+  articleUpdatedDate,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteName = 'Grzegorz Lachowski';
+const siteURL = Astro.site!.toString();
+const ogImageURL = new URL(image, Astro.site).toString();
+
+const isArticle = Boolean(articleDate);
+const isHomepage = Astro.url.pathname === '/';
+const isAbout = Astro.url.pathname === '/about' || Astro.url.pathname === '/about/';
+
+const jsonLd = isArticle
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description,
+      image: ogImageURL,
+      datePublished: articleDate!.toISOString(),
+      ...(articleUpdatedDate ? { dateModified: articleUpdatedDate.toISOString() } : {}),
+      author: {
+        '@type': 'Person',
+        name: siteName,
+        url: siteURL,
+      },
+      publisher: {
+        '@type': 'Person',
+        name: siteName,
+        url: siteURL,
+      },
+      url: canonicalURL.toString(),
+    }
+  : isAbout
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: siteName,
+      url: siteURL,
+      jobTitle: 'Software Developer',
+      worksFor: { '@type': 'Organization', name: 'RavenDB' },
+      sameAs: [
+        'https://github.com/gregolsky',
+        'https://www.linkedin.com/in/gregolsky/',
+      ],
+    }
+  : isHomepage
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: siteName,
+      url: siteURL,
+      description,
+      author: {
+        '@type': 'Person',
+        name: siteName,
+      },
+    }
+  : null;
 ---
 
 <!doctype html>
@@ -34,19 +90,24 @@ const siteName = 'Grzegorz Lachowski';
     <link rel="alternate" type="application/rss+xml" title={siteName} href="/rss.xml" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content={articleDate ? 'article' : 'website'} />
+    <meta property="og:type" content={isArticle ? 'article' : 'website'} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image" content={ogImageURL} />
     <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_US" />
     {articleDate && <meta property="article:published_time" content={articleDate.toISOString()} />}
+    {articleUpdatedDate && <meta property="article:modified_time" content={articleUpdatedDate.toISOString()} />}
 
     <!-- Twitter/X Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Structured data -->
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>

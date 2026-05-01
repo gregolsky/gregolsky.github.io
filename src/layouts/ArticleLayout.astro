@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { article } = Astro.props;
-const { title, description, pubDate, cover, coverAlt, tags } = article.data;
+const { title, description, pubDate, updatedDate, cover, coverAlt, tags } = article.data;
 
 const formattedDate = pubDate.toLocaleDateString('en-GB', {
   year: 'numeric',
@@ -19,7 +19,7 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
 });
 ---
 
-<BaseLayout title={title} description={description} articleDate={pubDate}>
+<BaseLayout title={title} description={description} articleDate={pubDate} articleUpdatedDate={updatedDate}>
   <Header compact />
   <main class="flex-1">
     <div class="max-w-3xl mx-auto px-6 md:px-10 py-10 md:py-14">
