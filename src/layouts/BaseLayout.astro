@@ -99,6 +99,7 @@ const jsonLd = isArticle
     <meta property="og:locale" content="en_US" />
     {articleDate && <meta property="article:published_time" content={articleDate.toISOString()} />}
     {articleUpdatedDate && <meta property="article:modified_time" content={articleUpdatedDate.toISOString()} />}
+    {isArticle && <meta property="article:author" content="https://www.linkedin.com/in/gregolsky/" />}
 
     <!-- Twitter/X Card -->
     <meta name="twitter:card" content="summary_large_image" />
