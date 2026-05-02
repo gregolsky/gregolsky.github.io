@@ -54,4 +54,8 @@ I can't promise a weekly cadence. Four kids and a full-time job don't negotiate.
 
 In just the last two weeks I've already shipped 3–4 small projects that would have sat in the "someday" pile indefinitely. I'll be writing about each of them in the next posts.
 
+My GitHub commit history says the rest — the start of 2026 is noticeably busier than the years before it.
+
+![GitHub activity chart — start of 2026 looks noticeably busier](/images/gh-activity.png)
+
 Expect more updates.
