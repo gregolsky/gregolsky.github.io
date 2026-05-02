@@ -37,11 +37,11 @@ Everything lives in your browser's `localStorage`. Nothing is sent anywhere beyo
 
 ## The Tech, Briefly
 
-Groovepede has no build step, no framework, and no dependencies. It's plain HTML with native ES modules, a service worker for offline and PWA installability, and `localStorage` for state. Deployed off GitHub Pages.
+Groovepede has no framework and no runtime dependencies — Vite handles the dev server and production build. A service worker covers offline support and PWA installability; `localStorage` holds all state. Deployed off GitHub Pages.
 
 Authentication is Spotify's [PKCE OAuth flow](https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow), which means no backend, no server, no secrets to store. The app asks for the `user-read-private` scope and nothing else — it doesn't read your listening history, your playlists, or anything else about you. Album metadata comes from the Spotify Web API; genre tags, artist bios, and similar artists come from the [Last.fm API](https://www.last.fm/api).
 
-Rendering is aggressively old-school: string concatenation in a single `render.js`, one delegated event listener on `document.body`, state held in module-level variables. The whole thing is a few hundred lines of readable JavaScript. Code is on [GitHub](https://github.com/gregolsky/groovepede) if you want to poke around or self-host your own instance.
+The JavaScript is split into a handful of focused modules — `api.js`, `app.js`, `auth.js`, `config.js`, `render.js`, `storage.js` — and has grown as features were added. Rendering works the same way it always did: template literals piped into `innerHTML`, one delegated event listener on `document.body`, state in module-level variables. No virtual DOM, no component framework. Code is on [GitHub](https://github.com/gregolsky/groovepede) if you want to poke around or self-host your own instance.
 
 ## Try It
 
