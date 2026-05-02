@@ -8,7 +8,7 @@ coverAlt: "My Little AI Revolution"
 draft: false
 ---
 
-I've been a software developer for over a decade. I know how to build things. I know what good architecture looks like, what tools to reach for, how to set up a CI pipeline or migrate a codebase to a modern stack. The knowledge was never the problem.
+I've been a software developer for over 15 years. At work I lead a team, ship code, and know what good architecture looks like — what tools to reach for, how to set up a CI pipeline, how to migrate a codebase to a modern stack. But this post isn't about my day job. It's about the pile of personal pet projects — this blog included — that I'd been wanting to build for fun and profit, and that sat untouched for years even though, technically, I knew exactly how to build every one of them. The knowledge was never the problem.
 
 The problem was the *entry level*.
 
@@ -26,7 +26,11 @@ Think of Mr. Meeseeks from *Rick and Morty*. You press the button, a Meeseeks po
 
 That's closer to how using Claude feels than the sci-fi "AI takes over your job" narrative. You summon it for a specific thing, it helps you knock it out, and you stay in the driver's seat. The difference is Meeseeks starts to suffer if the task drags on. Claude also starts to suffer — just more quietly. As the context window fills up, it starts hallucinating, losing track of earlier decisions, contradicting itself. The trick is knowing when to start a fresh conversation rather than dragging one session past its limits.
 
-Earlier this year I got a Claude subscription. And something shifted.
+There's a second analogy, more personal. A few weeks ago my wife was on duty and I was home alone with all four kids. We needed to get the shopping done before the weekend, so I took them with me. At the entrance I split the list: *you go find oil, you grab cocoa, you get tomatoes, you find carrots*. They scattered into the aisles. A few minutes later they converged back on me, each with their item, ready for the next thing. We had the whole list in the basket in no time. At the checkout each of them picked up a bag to carry home.
+
+That's sub-agents. Claude Code can spin up multiple agents in parallel — one reads the codebase, one searches for patterns, one drafts an implementation, one runs the tests. They go lurking, then report back. You stay at the basket. The coordination is still yours, but the legwork is distributed.
+
+Earlier this year I got a personal Claude subscription. And something shifted.
 
 Not because Claude writes perfect code (it doesn't, always), or because it replaces thinking (it doesn't). But because it collapses the activation energy. I can describe what I want, see a working scaffold in minutes, iterate on design decisions conversationally, and skip the part where I spend two hours reading documentation for a tool I'll use once.
 
