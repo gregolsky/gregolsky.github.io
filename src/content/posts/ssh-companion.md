@@ -32,6 +32,8 @@ The container runs unprivileged — `--cap-drop=ALL`, no new privileges. It can 
 
 One caveat worth repeating from the README: don't `cat` your secrets. If you pipe a `.env` file to the terminal, Claude will read it. That's the deal you make when you put an AI observer on your session. The security model is about the container, not about what you type.
 
+**WARNING:** token mileage will vary depending on transcript volume. A busy session — lots of command output, verbose logs, long dmesg dumps — means a large transcript fed into context each time Claude responds. Short diagnostic sessions work beautifully. Multi-hour tail-follow sessions will burn through context fast.
+
 ## tmux makes it actually nice
 
 The whole thing launches in [tmux](https://github.com/tmux/tmux/wiki) on Linux — arguably the most underrated tool in any Unix workflow. One command splits your terminal: SSH session on the left, Claude Code on the right, watching the same transcript. If you haven't spent serious time with tmux, this project is a decent excuse to start. It turns a single terminal into a proper workspace, with panes, sessions, and keyboard-driven navigation that becomes muscle memory fast. On Windows, SSH Companion uses Windows Terminal with separate panes instead — same idea, different plumbing. The launch scripts cover both: `companion.sh` for bash, `companion.ps1` for PowerShell.
@@ -51,6 +53,8 @@ Brendan Gregg is the performance engineer's performance engineer — the person 
 # launch SSH session with your AI wingman
 ./companion.sh ssh user@yourserver
 ```
+
+`companion.sh` does more than launch tmux. It manages the MCP server registration and Claude permissions by writing the appropriate Claude settings directly into the repo — so each run spins up a fresh, self-contained MCP server instance scoped to that session. When the session ends, nothing lingers. No global config pollution, no leftover server processes.
 
 The repo is at [github.com/gregolsky/ssh-companion](https://github.com/gregolsky/ssh-companion). You'll need Docker, tmux, and Claude Code CLI. The README walks through the setup — it's a few steps but nothing exotic.
 
