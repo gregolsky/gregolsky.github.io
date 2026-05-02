@@ -18,8 +18,11 @@ SSH Companion is a small MCP server that wraps your SSH session and lets Claude 
 
 This matters. You stay in control of the keyboard. Claude stays in the role it's actually good at: pattern recognition, recall, and commentary. The session is yours. The wingman is just over your shoulder.
 
-<!-- TODO: add image: logo/icon from the ssh-companion repo -->
+<div style="width: 66%; margin: 0 auto;">
+
 ![SSH Companion logo](../../assets/articles/ssh-companion-icon.png)
+
+</div>
 
 ## How it works
 
