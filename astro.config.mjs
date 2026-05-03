@@ -6,7 +6,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 export default defineConfig({
-  site: 'https://gregolsky.github.io',
+  site: 'https://gregolsky.pl',
   base: '/',
   trailingSlash: 'ignore',
   output: 'static',
