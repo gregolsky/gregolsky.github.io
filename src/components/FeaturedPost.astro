@@ -16,23 +16,26 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
 });
 ---
 
-<a href={`/posts/${post.slug}/`} class="group block">
+<a href={`/posts/${post.slug}/`} class="group block enter-on-load">
   <article>
     {cover && (
-      <div class="overflow-hidden rounded-sm mb-5 aspect-video bg-brand-dusk/20">
+      <div
+        class="media-frame overflow-hidden rounded-sm mb-5 aspect-video"
+        transition:name={`cover-${post.slug}`}
+      >
         <Image
           src={cover}
           alt={coverAlt ?? title}
           width={640}
           height={360}
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
         />
       </div>
     )}
     <div class="flex flex-wrap gap-1.5 mb-3">
       {tags.map((tag) => <span class="term-tag">{tag}</span>)}
     </div>
-    <h2 class="font-sans text-2xl md:text-3xl font-bold tracking-tightest text-brand-paper leading-tight group-hover:text-brand-glow transition-colors mb-3">
+    <h2 class="font-sans text-2xl md:text-3xl font-bold tracking-tightest text-brand-paper leading-tight group-hover:text-brand-glow transition-colors mb-3 phosphor-hover">
       {title}
     </h2>
     <p class="text-brand-fog/70 text-base font-sans leading-relaxed mb-4">

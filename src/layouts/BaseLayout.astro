@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -112,6 +113,11 @@ const jsonLd = isArticle
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <ViewTransitions />
+
+    <!-- Set html.js before first paint so entrance-animation CSS activates -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
     <!-- Google tag (gtag.js) -->
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-N7GDB1FP14"></script>
     <script is:inline>
@@ -125,6 +131,90 @@ const jsonLd = isArticle
     </script>
   </head>
   <body class="min-h-screen flex flex-col">
+    <!-- CRT overlay elements -->
+    <div class="crt-scanlines" aria-hidden="true"></div>
+    <div class="crt-vignette" aria-hidden="true"></div>
+    <div class="crt-boot"     aria-hidden="true"></div>
+
     <slot />
+
+    <script is:inline>
+      /* Guard: only wire listeners once across view-transition navigations */
+      if (!window._siteInitDone) {
+        window._siteInitDone = true;
+
+        var _clockInterval = null;
+
+        function initMediaFrames() {
+          document.querySelectorAll('.media-frame').forEach(function(frame) {
+            var img = frame.querySelector('img');
+            if (!img) return;
+            if (img.complete && img.naturalWidth > 0) {
+              frame.dataset.loaded = 'true';
+              return;
+            }
+            frame.classList.add('loading');
+            img.addEventListener('load', function() {
+              frame.classList.remove('loading');
+              frame.dataset.loaded = 'true';
+            }, { once: true });
+          });
+        }
+
+        function initScrollAnimations() {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.enter-on-scroll').forEach(function(el) {
+              el.classList.add('is-visible');
+            });
+            return;
+          }
+          var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1 });
+          document.querySelectorAll('.enter-on-scroll').forEach(function(el) {
+            io.observe(el);
+          });
+        }
+
+        function initClock() {
+          if (_clockInterval) clearInterval(_clockInterval);
+          var el = document.querySelector('[data-utc-clock]');
+          if (!el) return;
+          function tick() {
+            var t = new Date();
+            el.textContent =
+              String(t.getUTCHours()).padStart(2,'0') + ':' +
+              String(t.getUTCMinutes()).padStart(2,'0') + ':' +
+              String(t.getUTCSeconds()).padStart(2,'0') + ' UTC';
+          }
+          tick();
+          _clockInterval = setInterval(function() {
+            /* re-query in case view transition swapped the node */
+            el = document.querySelector('[data-utc-clock]');
+            if (el) tick();
+          }, 1000);
+        }
+
+        function triggerBoot() {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          document.body.classList.remove('is-booting');
+          void document.body.offsetWidth;
+          document.body.classList.add('is-booting');
+          setTimeout(function() { document.body.classList.remove('is-booting'); }, 800);
+        }
+
+        document.addEventListener('astro:page-load', function() {
+          initMediaFrames();
+          initScrollAnimations();
+          initClock();
+          triggerBoot();
+        });
+      }
+    </script>
   </body>
 </html>

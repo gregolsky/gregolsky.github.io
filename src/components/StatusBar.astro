@@ -1,0 +1,12 @@
+---
+const raw = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = raw === '/' ? '~' : `~${raw}`;
+---
+
+<div class="status-bar" role="status" aria-label="Site status">
+  <span class="text-brand-glow" aria-hidden="true">●</span>
+  <span class="text-brand-paper/90">gregolsky.pl</span>
+  <span class="text-brand-fog/40">:</span>
+  <span class="text-brand-glow/80">{path}</span>
+  <span class="ml-auto text-brand-fog/50" data-utc-clock aria-live="off">--:--:-- UTC</span>
+</div>

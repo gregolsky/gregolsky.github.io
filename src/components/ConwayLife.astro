@@ -1,24 +1,31 @@
 <canvas
   id="gol-canvas"
-  class="absolute inset-0 w-full h-full z-[1] cursor-crosshair"
+  class="hidden sm:block absolute inset-0 w-full h-full z-[1] cursor-crosshair"
   aria-label="Conway's Game of Life — click or drag to draw cells"
 ></canvas>
 
 <script>
+if (!window.matchMedia('(max-width: 639px)').matches) {
+
 const canvas = document.getElementById('gol-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d')!;
 
 const CELL = 14;
-const FPS = 1.5;
-const ALIVE_COLOR = 'rgba(18, 28, 48, 0.30)'; // dark blue-gray, 30% opacity
-const DEAD_COLOR  = 'rgba(0,0,0,0)';
+const FPS  = 2.2;           // faster ticks so generations overlap visibly
+const BIRTH_EASE = 0.30;    // cells light up quickly
+const DEATH_EASE = 0.045;   // cells fade slowly — phosphor afterglow
+const CELL_ALPHA = 0.18;    // peak opacity of alive cells
+const ALIVE_COLOR = 'rgb(195 148 68)'; // warm amber-phosphor
 const INIT_DENSITY = 0.12;
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 let cols = 0, rows = 0;
 let grid: Uint8Array;
 let next: Uint8Array;
+let opacity: Float32Array;
 let painting = false;
-let paintState = 1; // 1=draw, 0=erase
+let paintState = 1;
 let raf: number;
 let lastTick = 0;
 
@@ -27,11 +34,12 @@ function resize() {
   rows = Math.floor(canvas.offsetHeight / CELL);
   canvas.width  = cols * CELL;
   canvas.height = rows * CELL;
-  grid = new Uint8Array(cols * rows);
-  next = new Uint8Array(cols * rows);
-  // seed random cells
+  grid    = new Uint8Array(cols * rows);
+  next    = new Uint8Array(cols * rows);
+  opacity = new Float32Array(cols * rows);
   for (let i = 0; i < grid.length; i++) {
-    grid[i] = Math.random() < INIT_DENSITY ? 1 : 0;
+    grid[i]    = Math.random() < INIT_DENSITY ? 1 : 0;
+    opacity[i] = grid[i];
   }
 }
 
@@ -58,18 +66,34 @@ function draw() {
   ctx.fillStyle = ALIVE_COLOR;
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      if (grid[idx(c, r)]) {
+      const o = opacity[idx(c, r)];
+      if (o > 0.015) {
+        ctx.globalAlpha = CELL_ALPHA * o;
         ctx.fillRect(c * CELL + 1, r * CELL + 1, CELL - 2, CELL - 2);
       }
     }
   }
+  ctx.globalAlpha = 1;
 }
 
 function tick(ts: number) {
   raf = requestAnimationFrame(tick);
-  if (ts - lastTick < 1000 / FPS) return;
-  lastTick = ts;
-  step();
+
+  if (ts - lastTick >= 1000 / FPS) {
+    lastTick = ts;
+    step();
+  }
+
+  if (reducedMotion) {
+    for (let i = 0; i < opacity.length; i++) opacity[i] = grid[i];
+  } else {
+    for (let i = 0; i < opacity.length; i++) {
+      const target = grid[i];
+      const ease   = target > opacity[i] ? BIRTH_EASE : DEATH_EASE;
+      opacity[i]  += (target - opacity[i]) * ease;
+    }
+  }
+
   draw();
 }
 
@@ -85,7 +109,8 @@ function cellAt(e: MouseEvent | Touch) {
 function paint(e: MouseEvent | Touch) {
   const { c, r } = cellAt(e);
   if (c >= 0 && c < cols && r >= 0 && r < rows) {
-    grid[idx(c, r)] = paintState;
+    grid[idx(c, r)]    = paintState;
+    opacity[idx(c, r)] = paintState; // instant feedback on manual draw
     draw();
   }
 }
@@ -127,4 +152,6 @@ io.observe(canvas);
 
 resize();
 raf = requestAnimationFrame(tick);
+
+} // end mobile guard
 </script>

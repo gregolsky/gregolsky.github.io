@@ -16,22 +16,25 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
 });
 ---
 
-<li>
+<li class="enter-on-scroll">
   <a href={`/posts/${post.slug}/`} class="group flex gap-3 py-4 hairline hover:bg-brand-fog/5 transition-colors px-2 -mx-2 rounded-sm">
     {cover && (
-      <div class="shrink-0 w-16 h-16 overflow-hidden rounded-sm bg-brand-dusk/20">
+      <div
+        class="media-frame shrink-0 w-16 h-16 overflow-hidden rounded-sm"
+        transition:name={`cover-${post.slug}`}
+      >
         <Image
           src={cover}
           alt={coverAlt ?? title}
           width={64}
           height={64}
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
         />
       </div>
     )}
     <div class="min-w-0">
       <time class="font-mono text-xs text-brand-fog/40">{formattedDate}</time>
-      <h3 class="font-sans text-sm font-semibold text-brand-paper/90 mt-0.5 leading-snug group-hover:text-brand-glow transition-colors line-clamp-2">
+      <h3 class="font-sans text-sm font-semibold text-brand-paper/90 mt-0.5 leading-snug group-hover:text-brand-glow transition-colors line-clamp-2 phosphor-hover">
         {title}
       </h3>
       <p class="text-brand-fog/50 text-xs mt-1 line-clamp-2 font-sans leading-relaxed">

@@ -10,7 +10,7 @@ export default {
         brand: {
           fog: '#8E9AAE',
           dusk: '#3B4355',
-          night: '#1A1F29',
+          night: '#1C1B26',
           paper: '#E8ECF1',
           glow: '#E8B26A',
         },
