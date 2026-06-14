@@ -29,7 +29,7 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
             alt={coverAlt ?? title}
             width={112}
             height={112}
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu"
           />
         </div>
       )}
