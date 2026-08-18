@@ -118,32 +118,31 @@ too many.
 The one piece I'm still proud of is the auth. Rather than baking a shared secret into a public
 JavaScript bundle, requests carry an `x-gp-token` — an ECDSA-P256 signature over a timestamp and
 the URL being resolved, valid for five minutes and bound to that one URL. It's honest about what
-it is: the private key ships in the public bundle, so a determined person can mint tokens. It's a
-much better deterrent than a static string, and a sniffed token is worth one URL for five minutes.
-The real limits are the rate limiter and the ban rules behind it.
+it is: the private key ships in the public bundle, so a determined person can mint tokens. But a
+sniffed token is worth one URL for five minutes, and the real limits are the rate limiter and the
+ban rules behind it.
 
-The rest was a week of CloudFormation attrition. `ROLLBACK_COMPLETE` states that can't be updated
-and have to be deleted. `expected type: JSONArray, found: JSONObject` on a policy block that looks
-exactly like the docs. A cert stuck `PENDING_VALIDATION` while I stared at a Route 53 record that
-was already correct.
+The rest was CloudFormation attrition — a week on the calendar, which in pet-project currency
+means a couple of evenings: `ROLLBACK_COMPLETE` states that can't be updated and have to be
+deleted, a policy block rejected with `expected type: JSONArray, found: JSONObject` that looks
+exactly like the docs, a cert stuck `PENDING_VALIDATION` against a Route 53 record that was
+already correct.
 
-And then the one I actually enjoyed, once it stopped hurting. ACM refused to issue with
-`CAA_ERROR`. Nothing in my hosted zone had a CAA record. Nothing in the parent zone either. Except
-— `groovepede.gregolsky.pl` is a CNAME to `gregolsky.github.io`, because the app is on GitHub
-Pages. CAA lookups follow that. GitHub's CAA record authorises GitHub's certificate authorities,
-and Amazon is not on the list. My *frontend's* hosting provider was refusing to let my *backend*
-get a certificate. The fix is a CAA record on the leaf domain naming Amazon, then fifteen minutes
-of waiting for a negative DNS cache to expire — which is a wonderful thing to discover at 1am.
+One of them I enjoyed, once it stopped hurting. ACM refused to issue with `CAA_ERROR`, and nothing
+in my hosted zone or its parent had a CAA record. Except — `groovepede.gregolsky.pl` is a CNAME to
+`gregolsky.github.io`, because the app is on GitHub Pages, and CAA lookups follow that. GitHub's
+CAA record authorises GitHub's certificate authorities, and Amazon is not on the list. My
+*frontend's* hosting provider was refusing to let my *backend* get a certificate. The fix is a CAA
+record on the leaf domain naming Amazon, then fifteen minutes waiting for a negative DNS cache to
+expire.
 
 It worked in the end. I had a resolver at `api.groovepede.gregolsky.pl` and the two stuck albums
 healed themselves on the next refresh.
 
-And then I looked at what I'd actually built. An edge network with global points of presence, a web
-application firewall, a managed NoSQL database and autoscaling compute — all of it in front of one
-endpoint whose entire job is to ask a third party "where else can you get this album?" and remember
-the answer for sixty days.
-
-This thing serves a few calls a week. Most of them hit the cache. There is no spike coming.
+And then I looked at what I'd actually built: an edge network with global points of presence, a web
+application firewall, a managed NoSQL database and autoscaling compute, all in front of one endpoint
+whose entire job is to ask a third party "where else can you get this album?" and remember the answer
+for sixty days. It serves a few calls a week, most of them from cache. There is no spike coming.
 
 ## Then it moved into my house
 
