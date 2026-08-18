@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1190" viewBox="0 0 1400 1190">
+  <defs>
+    <marker id="arrow" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#0FD287"/>
+    </marker>
+
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <radialGradient id="ambient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0FD287" stop-opacity="0.13"/>
+      <stop offset="60%" stop-color="#0FD287" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#0FD287" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="ambientWarm" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFC14D" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#FFC14D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1400" height="1190" fill="#121212"/>
+  <ellipse cx="700" cy="610" rx="720" ry="440" fill="url(#ambient)"/>
+  <ellipse cx="700" cy="150" rx="520" ry="260" fill="url(#ambientWarm)"/>
+
+  <!-- header -->
+  <circle cx="70" cy="58" r="9" fill="#0FD287" filter="url(#softGlow)"/>
+  <text x="98" y="66" font-family="Noto Sans, sans-serif" font-size="24" font-weight="700" letter-spacing="4" fill="#9a948c">GROOVEPEDE RESOLVER</text>
+
+  <!-- BROWSER -->
+  <rect x="356" y="110" width="624" height="150" rx="20" fill="#1b1916" stroke="#2b2723" stroke-width="2"/>
+  <text x="668" y="180" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="38" font-weight="700" fill="#f5f3ee">Browser</text>
+  <text x="668" y="222" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="21" fill="#9a948c">groovepede.gregolsky.pl · localStorage</text>
+
+  <!-- arrow 1 -->
+  <line x1="668" y1="262" x2="668" y2="352" stroke="#0FD287" stroke-opacity="0.16" stroke-width="16" stroke-linecap="round"/>
+  <line x1="668" y1="262" x2="668" y2="352" stroke="#0FD287" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <text x="700" y="296" font-family="DejaVu Sans Mono, monospace" font-size="21" fill="#0FD287">GET /v1/resolve?url=…</text>
+  <text x="700" y="328" font-family="DejaVu Sans Mono, monospace" font-size="21" fill="#5a554e">x-gp-token: ECDSA-P256, 5 min</text>
+
+  <!-- PI CONTAINER -->
+  <rect x="300" y="364" width="1030" height="486" rx="30" fill="#161310" fill-opacity="0.75" stroke="#0FD287" stroke-opacity="0.4" stroke-width="3" stroke-dasharray="12 10"/>
+  <rect x="336" y="340" width="312" height="46" rx="23" fill="#0FD287"/>
+  <text x="492" y="371" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="19" font-weight="700" letter-spacing="2" fill="#121212">RASPBERRY PI · ARM64</text>
+
+  <!-- NGINX -->
+  <rect x="356" y="436" width="624" height="140" rx="20" fill="#1b1916" stroke="#2b2723" stroke-width="2"/>
+  <text x="668" y="496" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="32" font-weight="700" fill="#f5f3ee">nginx</text>
+  <text x="668" y="538" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="20" fill="#9a948c">TLS · per-IP rate limit · access log</text>
+
+  <!-- arrow 2 -->
+  <line x1="668" y1="578" x2="668" y2="642" stroke="#0FD287" stroke-opacity="0.16" stroke-width="16" stroke-linecap="round"/>
+  <line x1="668" y1="578" x2="668" y2="642" stroke="#0FD287" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+  <!-- RESOLVER -->
+  <rect x="356" y="654" width="624" height="170" rx="20" fill="#232019" stroke="#0FD28740" stroke-width="2"/>
+  <text x="668" y="712" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="32" font-weight="700" fill="#f5f3ee">resolver</text>
+  <text x="668" y="752" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="20" fill="#9a948c">token verify · origin + host allowlist</text>
+  <text x="668" y="788" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="20" fill="#FFC14D">SQLite cache — 60 days</text>
+
+  <!-- side services -->
+  <rect x="1024" y="436" width="274" height="140" rx="18" fill="#161310" stroke="#232019" stroke-width="2"/>
+  <text x="1161" y="500" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="25" font-weight="700" fill="#9a948c">certbot</text>
+  <text x="1161" y="536" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="18" fill="#5a554e">Let's Encrypt</text>
+
+  <rect x="1024" y="654" width="274" height="170" rx="18" fill="#161310" stroke="#232019" stroke-width="2"/>
+  <text x="1161" y="714" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="25" font-weight="700" fill="#9a948c">fail2ban</text>
+  <text x="1161" y="752" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="18" fill="#5a554e">ban on any 404</text>
+  <text x="1161" y="784" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="18" fill="#5a554e">→ DOCKER-USER</text>
+
+  <!-- arrow 3 -->
+  <line x1="668" y1="852" x2="668" y2="940" stroke="#0FD287" stroke-opacity="0.16" stroke-width="16" stroke-linecap="round"/>
+  <line x1="668" y1="852" x2="668" y2="940" stroke="#0FD287" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <text x="700" y="906" font-family="DejaVu Sans Mono, monospace" font-size="21" fill="#0FD287">cache miss only</text>
+
+  <!-- ODESLI -->
+  <rect x="356" y="950" width="624" height="150" rx="20" fill="#1b1916" stroke="#2b2723" stroke-width="2"/>
+  <text x="668" y="1014" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="34" font-weight="700" fill="#f5f3ee">Odesli</text>
+  <text x="668" y="1056" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="20" fill="#9a948c">api.song.link — no CORS header for us</text>
+
+  <!-- footnote -->
+  <text x="70" y="1152" font-family="DejaVu Sans Mono, monospace" font-size="19" fill="#5a554e">The browser never calls Odesli directly. That is the whole reason this diagram exists.</text>
+</svg>
