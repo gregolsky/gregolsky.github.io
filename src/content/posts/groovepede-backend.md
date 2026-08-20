@@ -5,7 +5,7 @@ pubDate: 2026-08-17
 tags: ["pwa", "music", "side-project", "raspberry-pi", "spotify", "aws", "self-hosting", "docker"]
 cover: "../../assets/articles/groovepede-backend.jpeg"
 coverAlt: "A Raspberry Pi glowing on a dark desk, surrounded by floating vinyl sleeves linked to it by neon-lime light"
-draft: true
+draft: false
 ---
 
 Back in April I wrote about [Groovepede](/posts/groovepede) — a tiny PWA that catches album
@@ -50,6 +50,8 @@ and the top comment settles the whole thing in one sentence: *"If your app relie
 integration how do you get to 250,000 users without a music integration?"* The reply under it:
 *"Entry level job that requires 10 years experience kind of situation."*
 
+![How to build a Spotify app: step 1, write code; step 2, 250,000 monthly active users](../../assets/articles/groovepede-backend_howto_build_spotify_app.jpeg)
+
 The saddest part of that thread is its tail. It kept collecting comments for a year afterwards, all
 the same shape — *"I spent almost a year building my side project, and now it's just time wasted."*
 *"Just finished building something I was so proud of and realized I was under the outdated impression
@@ -74,6 +76,11 @@ Login is optional now. You can add albums, browse them, filter by genre and hit 
 account at all. Spotify OAuth still exists, but only for one opt-in extra: mirroring your queue into
 a private Spotify playlist. It's a connected service, not a gate — and if you're not one of my five
 allowlisted users, that one extra is the only thing you don't get.
+
+That said, "optional" is a today statement, not a promise. The resolver currently rate-limits by IP,
+which is a blunt instrument on shared networks — if it turns out to be too blunt, the fix is some
+form of SSO (Google or otherwise) so limits can key off a user ID instead of an IP. That would make
+login the price of heavier use, not the price of entry.
 
 <!-- TODO: add image: current app screenshot — queue view with a couple of albums, genre tag chips, and the "Listen on <service>" button visible -->
 <!-- ![Groovepede's queue, with genre tags and a Listen button pointed at your preferred service](../../assets/articles/groovepede-backend-app.png) -->
