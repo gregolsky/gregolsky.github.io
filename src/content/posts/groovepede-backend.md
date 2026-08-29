@@ -122,16 +122,9 @@ I had an AWS account, so that's where it went first: a Lambda behind CloudFront,
 resolve cache, WAF for rate limiting, plain CloudFormation once I decided SAM was one abstraction
 too many.
 
-The one piece I'm still proud of is the auth. Rather than baking a shared secret into a public
-JavaScript bundle, requests carry an `x-gp-token` — an ECDSA-P256 signature over a timestamp and
-the URL being resolved, valid for five minutes and bound to that one URL. It's honest about what
-it is: the private key ships in the public bundle, so a determined person can mint tokens. But a
-sniffed token is worth one URL for five minutes, and the real limits are the rate limiter and the
-ban rules behind it.
-
-The rest was CloudFormation attrition — a week on the calendar, which in pet-project currency
-means a couple of evenings: `ROLLBACK_COMPLETE` states that can't be updated and have to be
-deleted, a policy block rejected with `expected type: JSONArray, found: JSONObject` that looks
+Getting it working was CloudFormation attrition — a week on the calendar, which in pet-project
+currency means a couple of evenings: `ROLLBACK_COMPLETE` states that can't be updated and have to
+be deleted, a policy block rejected with `expected type: JSONArray, found: JSONObject` that looks
 exactly like the docs, a cert stuck `PENDING_VALIDATION` against a Route 53 record that was
 already correct.
 
