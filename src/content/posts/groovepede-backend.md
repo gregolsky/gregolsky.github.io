@@ -166,11 +166,18 @@ nginx for TLS and rate limiting, certbot for a free Let's Encrypt cert, fail2ban
 Same key pair for both, so the app's signed tokens are valid against either backend and switching
 is one config line.
 
-<!-- TODO: add image: architecture diagram — browser → nginx (TLS, rate limit) → resolver (token verify, allowlist, SQLite cache) → Odesli, with certbot and fail2ban alongside -->
 ![The resolver stack: browser to nginx to resolver to Odesli, with a 60-day SQLite cache in front](../../assets/articles/groovepede-backend-architecture.png)
 
 Two days after the Pi went live I deleted the AWS deployment from the repo. Lambda, CloudFront,
 WAF, the templates, the Makefile — all of it. Git still has it if I'm ever wrong.
+
+Deploys needed their own trick: the Pi sits behind a home router with no inbound SSH, so CI can't
+push to it. Instead, deploys are *pulled*. A push to `backend/` publishes to a secret
+[ntfy.sh](https://ntfy.sh/) topic — a nice little pub/sub notification service, `curl` a URL and
+every subscribed client gets pinged, no account or infra of your own required — a small client on
+the Pi picks that up and runs `ansible-pull`. CI then polls `/healthz` until it reports the commit
+SHA it just pushed. Polling for `{"ok": true}` would be useless: the *old* build says that too. The
+commit is what proves anything landed.
 
 The rest of it I got for free. The cache is a SQLite file I can open. When something breaks I `ssh`
 in and read a log instead of correlating across four consoles. And there's no billing surface at
@@ -191,60 +198,33 @@ three separate commands instead of one. `envsubst` sat reading stdin, and the re
 next "command" truncated nginx's config to zero bytes. nginx started perfectly and served
 nothing. My Pi was refusing my own connections.
 
-**The deploy script that destroyed the certificate.** `deploy.sh` checked for a cert, didn't find
-one the way it expected, and helpfully bootstrapped a new one — every single deploy. Let's
-Encrypt allows five duplicate certificates per domain per week. I noticed at four. Now every
-deploy backs up the cert first, to the Pi and to my laptop, and issuance is explicitly opt-in
-(`--init`) rather than inferred from "looks like there's no cert here." Guessing is fine for
-retries. It is not fine for anything rate-limited.
+**The deploy script that destroyed the certificate.** This one never looked broken, which is what
+qualifies it. `deploy.sh` checked for a cert, didn't find one the way it expected, and helpfully
+bootstrapped a new one — every single deploy, silently: no error, no warning, HTTPS serving fine
+the whole time. There was nothing to chase, because nothing looked wrong. Let's Encrypt allows five
+duplicate certificates per domain per week; I noticed at four, one deploy away from a week locked
+out of issuing anything. Now every deploy backs up the cert first, to the Pi and to my laptop, and
+issuance is explicitly opt-in (`--init`) rather than inferred from "looks like there's no cert
+here." Guessing is fine for retries. It is not fine for anything rate-limited.
 
 **The bans that banned nothing.** I added fail2ban jails, watched them report bans, and watched
-the same scanners keep hitting the server. Traffic to a Docker *published* port is DNAT'd in
-`PREROUTING` and traverses `FORWARD` — it never touches `INPUT`, which is where a stock fail2ban
-config puts its rules. The jump has to land in `DOCKER-USER`. And then a second one: bans were
-firing at half the configured threshold, because my nginx template renders into `conf.d/` — inside
-the `http` block, where `access_log` was already declared — so every request was logged twice and
-fail2ban counted each 404 twice.
+the same scanners keep hitting the server anyway. The obvious read is rotating IPs, or a ban that
+hasn't caught up yet — nothing about the symptom points at a rule aimed at traffic that never
+passes through it. Docker *published* ports are DNAT'd in `PREROUTING` and traverse `FORWARD`; they
+never touch `INPUT`, which is where a stock fail2ban config puts its rules. The jump has to land in
+`DOCKER-USER` instead. Fixing that surfaced a second, quieter bug: bans were firing at half the
+configured threshold, because my nginx template renders into `conf.d/` — inside the `http` block,
+where `access_log` was already declared — so every request was logged twice and fail2ban counted
+each 404 twice.
 
-The jail rule itself I like a lot: **ban on any 404.** This server has exactly two valid paths and
-an ACME directory. Nothing legitimate ever 404s here, so I don't need a blocklist of scanner paths
-that goes stale — anything that misses is hostile by definition.
-
-One more, filed under "the Pi is behind a home router with no inbound SSH, so CI can't push to
-it": deploys are now *pulled*. A push to `backend/` publishes to a secret ntfy.sh topic, a small
-client on the Pi picks it up and runs `ansible-pull`, and CI then polls `/healthz` until it
-reports the commit SHA it just pushed. Polling for `{"ok": true}` would be useless — the *old*
-build says that too. The commit is what proves anything landed.
-
-## The small stuff that took the longest
-
-**Artist images without a login.** Tapping an album for details showed a blank circle unless you
-were connected to Spotify. Last.fm can't help: it has returned the same placeholder image for
-every artist since 2019. So it chains — Spotify when you're connected, then TheAudioDB, then
-Deezer through a new endpoint on my own resolver, then a generated initials avatar. Against my
-real 35-album library, 33 get a correct photo, one has no image anywhere, and one is deliberately
-left blank: Deezer's best guess for "Black Limbo" is "Black Bomb A", and the wrong artist's face
-is worse than no face. Only URLs ever pass through my server — the image itself loads from the
-source's own CDN.
-
-**Two seconds of nothing.** Sharing an album from Spotify launched the app into a blank-looking
-queue for two or three seconds before anything acknowledged the share, because every scrap of
-feedback lived at the *end* of the flow — after the token refresh, after the resolver, after the
-metadata. The confirmation overlay now goes up before the first `await` and morphs through its
-phases in place. I also cut the entrance animation: instrumented on a cold launch, a scale-in
-scheduled via `requestAnimationFrame` sat frozen on its first frame for up to 400ms, because the
-main thread was busy booting the app — a stutter at exactly the moment the thing exists to
-prevent one.
-
-**A cleanup pass that found real bugs.** The visible album list was being computed independently
-in two files, and every click handler indexes into it — if they'd ever drifted, "Done" would have
-marked the wrong album. And Last.fm returns a 62,000-character biography for Miles Davis, which
-the explore card was rendering in full, unescaped, as a fifteen-thousand-pixel wall of text.
+The jail rule itself I like a lot: **ban on any 404.** This server has exactly three valid paths
+and an ACME directory. Nothing legitimate ever 404s here, so I don't need a blocklist of scanner
+paths that goes stale — anything that misses is hostile by definition.
 
 ## Where it is now
 
 Eight services. No login required. Everything still in `localStorage`, still offline-capable,
-still no framework. A 1.5 MB production build, down from 12. 259 unit tests, 69 end-to-end tests,
+still no framework. A 1.3 MB production build, down from 12. 300 unit tests, 69 end-to-end tests,
 and a smoke suite that runs against production after every deploy — which is the only thing that
 would catch the signing key in CI drifting out of sync with the public key on the Pi.
 
