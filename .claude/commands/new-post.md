@@ -29,7 +29,7 @@ If the user wants a hero image that doesn't exist yet, generate a detailed promp
 
 1. A complete `.md` file with:
    - Frontmatter: `title`, `description`, `pubDate` (today: use $CURRENT_DATE), `tags`, `cover` (`../../assets/articles/<slug>.png`), `coverAlt`, `draft: true`
-   - Full prose body in the user's voice (first person, direct, no fluff — match the tone of existing posts)
+   - Full prose body in the user's voice (first person, direct, no fluff), following the writing style rules in `CLAUDE.md`
    - Inline image placeholders using the pattern: `![<alt text>](../../assets/articles/<slug>-<descriptor>.png)` with a comment above each: `<!-- TODO: add image: <description> -->`
 
 2. A **Nano Banana prompt** for the hero image (if needed), formatted as a blockquote.
