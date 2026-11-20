@@ -91,5 +91,6 @@ a few half-hours.
 
 I haven't done the math. 🙂
 
-The source is on [GitHub](https://github.com/gregolsky/auchan-shopping-harness). The README
-explains how to set it up, if you shop at Auchan too.
+You can do your shopping this way too. The source is on
+[GitHub](https://github.com/gregolsky/auchan-shopping-harness), and the README explains how
+to set it up.
