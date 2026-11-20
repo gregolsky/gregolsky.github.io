@@ -21,7 +21,7 @@ output. I wanted to try building one on a real problem. Groceries were the obvio
 
 ## What it does
 
-The app is called **auchan-shopping-harness**. It runs on my own computer. I paste my list the
+The app is called **[auchan-shopping-harness](https://github.com/gregolsky/auchan-shopping-harness)**. It runs on my own computer. I paste my list the
 way I'd write it on paper: `mleko 2`, `chleb`, `ser żółty, gouda albo edam`. The app matches
 each line to a product. It uses my past orders to pick the one I usually buy. It also looks at
 current promotions. It asks only about the lines it isn't sure of.
@@ -90,3 +90,6 @@ a few half-hours.
 [![xkcd 1205: Is It Worth the Time? A chart of how long you can work on making a routine task more efficient before you spend more time than you save](https://imgs.xkcd.com/comics/is_it_worth_the_time.png)](https://xkcd.com/1205/)
 
 I haven't done the math. 🙂
+
+The source is on [GitHub](https://github.com/gregolsky/auchan-shopping-harness). The README
+explains how to set it up, if you shop at Auchan too.
